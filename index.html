@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoveCheck — Feel a little closer each day</title>
+    <meta name="description" content="The #1 couple app. Daily love quests, couple quizzes, and more. Trusted by 1M+ couples.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #FFF8F0;
+            color: #2D2D2D;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Fade-in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 24px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-logo {
+            font-size: 3.5rem;
+            color: #C41E3A;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .hero-tagline {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.75rem;
+            font-weight: 500;
+            color: #2D2D2D;
+            margin-bottom: 12px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: #888;
+            margin-bottom: 32px;
+        }
+
+        .store-badges {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+
+        .store-badge img {
+            height: 52px;
+            border-radius: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        .store-badge:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Phone Mockup */
+        .phone-mockup {
+            position: relative;
+            width: 280px;
+            height: 560px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 0 50px 100px rgba(196, 30, 58, 0.15), 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #FFF8F0 0%, #FFE8E0 100%);
+            border-radius: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .phone-heart {
+            width: 140px;
+            height: 130px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .phone-heart::before,
+        .phone-heart::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 70px;
+            height: 112px;
+            background: linear-gradient(180deg, #C41E3A 0%, #E85A70 100%);
+            border-radius: 70px 70px 0 0;
+        }
+
+        .phone-heart::before {
+            left: 70px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .phone-heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        .phone-days {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #C41E3A;
+        }
+
+        .phone-days-label {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 24px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #C41E3A;
+            margin-bottom: 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .feature-card {
+            background: #FFFFFF;
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(196, 30, 58, 0.1);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #FFF0F0 0%, #FFE0E5 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2D2D2D;
+            margin-bottom: 12px;
+        }
+
+        .feature-description {
+            font-size: 0.95rem;
+            color: #888;
+            line-height: 1.7;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 100px 24px;
+            background: linear-gradient(180deg, transparent 0%, rgba(196, 30, 58, 0.03) 100%);
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .steps {
+                flex-direction: row;
+                max-width: 900px;
+                gap: 24px;
+            }
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            padding: 32px 24px;
+        }
+
+        .step-number {
+            width: 64px;
+            height: 64px;
+            background: #C41E3A;
+            color: #FFFFFF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 auto 20px;
+        }
+
+        .step-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .step-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2D2D2D;
+            margin-bottom: 8px;
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 100px 24px;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.25rem;
+            color: #C41E3A;
+            margin-bottom: 32px;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 48px 24px;
+            text-align: center;
+            border-top: 1px solid rgba(196, 30, 58, 0.1);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: #C41E3A;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .hero-logo {
+                font-size: 2.5rem;
+            }
+
+            .hero-tagline {
+                font-size: 1.4rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .phone-mockup {
+                width: 240px;
+                height: 480px;
+            }
+
+            .phone-heart {
+                width: 100px;
+                height: 93px;
+            }
+
+            .phone-heart::before,
+            .phone-heart::after {
+                width: 50px;
+                height: 80px;
+            }
+
+            .phone-days {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-logo fade-in">LoveCheck</h1>
+            <p class="hero-tagline fade-in">Feel a little closer each day</p>
+            <p class="hero-subtitle fade-in">The #1 couple app. Trusted by 1M+ couples.</p>
+
+            <div class="store-badges fade-in">
+                <a href="https://apps.apple.com/app/lovecheck-couple-game/id6504616839" class="store-badge" target="_blank" rel="noopener">
+                    <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
+                </a>
+                <a href="#" class="store-badge" target="_blank" rel="noopener">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height: 77px; margin: -12px 0;">
+                </a>
+            </div>
+
+            <div class="phone-mockup fade-in">
+                <div class="phone-screen">
+                    <div class="phone-heart"></div>
+                    <div class="phone-days">525</div>
+                    <div class="phone-days-label">days together</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title fade-in">Everything you need to grow your love</h2>
+
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">✨</div>
+                    <h3 class="feature-title">Daily Love Quests</h3>
+                    <p class="feature-description">Complete daily quests together: Memory Flash, Song of the Day, Mood of the Day. Earn Love Points and level up!</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">💕</div>
+                    <h3 class="feature-title">Days Together Counter</h3>
+                    <p class="feature-description">Track your journey with a beautiful heart counter showing your days, streaks, and love level.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">💬</div>
+                    <h3 class="feature-title">Couple Quiz</h3>
+                    <p class="feature-description">Answer meaningful questions together — Classic or Spicy mode. Discover what makes your relationship unique.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📅</div>
+                    <h3 class="feature-title">Love Calendar</h3>
+                    <p class="feature-description">Celebrate moments that matter. See your love history day by day, track completed and missed days.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎨</div>
+                    <h3 class="feature-title">Love Doodles</h3>
+                    <p class="feature-description">Draw cute love sketches and send them to your partner.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Home Screen Widget</h3>
+                    <p class="feature-description">Add a cute LoveCheck widget to your Home Screen to always feel connected.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title fade-in">How it works</h2>
+
+            <div class="steps">
+                <div class="step fade-in">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">📲</div>
+                    <h3 class="step-title">Download LoveCheck</h3>
+                    <p class="step-description">Get the app from the App Store or Google Play</p>
+                </div>
+
+                <div class="step fade-in">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">💌</div>
+                    <h3 class="step-title">Invite your partner</h3>
+                    <p class="step-description">Send them an invite link to connect your accounts</p>
+                </div>
+
+                <div class="step fade-in">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">❤️</div>
+                    <h3 class="step-title">Connect every day</h3>
+                    <p class="step-description">Complete quests, answer quizzes, and grow together</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta-title fade-in">Start growing your love today</h2>
+
+            <div class="store-badges fade-in">
+                <a href="https://apps.apple.com/app/lovecheck-couple-game/id6504616839" class="store-badge" target="_blank" rel="noopener">
+                    <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
+                </a>
+                <a href="#" class="store-badge" target="_blank" rel="noopener">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height: 77px; margin: -12px 0;">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="mailto:hello@lovecheck.us">Support</a>
+            </div>
+            <p class="footer-copyright">© 2026 LoveCheck. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Fade-in animation on scroll using IntersectionObserver
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
