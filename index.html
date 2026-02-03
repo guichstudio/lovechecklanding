@@ -5,6 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LoveCheck — Feel a little closer each day</title>
     <meta name="description" content="The #1 couple app. Daily love quests, couple quizzes, and more. Trusted by 1M+ couples.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="LoveCheck — Feel a little closer each day">
+    <meta property="og:description" content="The #1 couple app. Daily love quests, couple quizzes, and more. Trusted by 1M+ couples.">
+    <meta property="og:image" content="https://lovecheckapp.com/icon.png">
+    <meta property="og:url" content="https://lovecheckapp.com">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LoveCheck — Feel a little closer each day">
+    <meta name="twitter:description" content="The #1 couple app. Daily love quests, couple quizzes, and more.">
+    <meta name="twitter:image" content="https://lovecheckapp.com/icon.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -772,7 +790,7 @@
                 <div class="slideshow-caption" id="slideshow-caption">Feel closer each day</div>
 
                 <div class="slideshow-main">
-                    <button class="slideshow-arrow prev" onclick="changeSlide(-1)">‹</button>
+                    <button class="slideshow-arrow prev" onclick="changeSlide(-1)" aria-label="Previous slide">‹</button>
 
                     <div class="phone-frame">
                         <div class="phone-screen">
@@ -811,7 +829,7 @@
                         </div>
                     </div>
 
-                    <button class="slideshow-arrow next" onclick="changeSlide(1)">›</button>
+                    <button class="slideshow-arrow next" onclick="changeSlide(1)" aria-label="Next slide">›</button>
                 </div>
 
                 <div class="slideshow-dots" id="slideshow-dots"></div>
@@ -915,8 +933,8 @@
                 <img src="icon.png" alt="LoveCheck" class="footer-icon">
             </div>
             <div class="footer-links">
-                <a href="/privacy.html">Privacy Policy</a>
-                <a href="/terms.html">Terms of Service</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
                 <a href="mailto:hello@lovecheck.us">Support</a>
             </div>
             <p class="footer-copyright">© 2026 LoveCheck. All rights reserved.</p>
