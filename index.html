@@ -249,19 +249,6 @@
             max-width: 500px;
         }
 
-        .slideshow-caption {
-            background: #2D2019;
-            color: #fff;
-            padding: 12px 28px;
-            border-radius: 100px;
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 20px;
-            letter-spacing: -0.06em;
-        }
-
         .slideshow-main {
             position: relative;
             display: flex;
@@ -295,11 +282,11 @@
         }
 
         .slideshow-arrow.prev {
-            left: -80px;
+            left: -70px;
         }
 
         .slideshow-arrow.next {
-            right: -80px;
+            right: -70px;
         }
 
         .phone-frame {
@@ -423,16 +410,11 @@
             }
 
             .slideshow-arrow.prev {
-                left: -56px;
+                left: -52px;
             }
 
             .slideshow-arrow.next {
-                right: -56px;
-            }
-
-            .slideshow-caption {
-                font-size: 14px;
-                padding: 10px 20px;
+                right: -52px;
             }
         }
 
@@ -729,8 +711,6 @@
 
         <div class="hero-slideshow-wrapper fade-in">
             <div class="slideshow-container">
-                <div class="slideshow-caption" id="slideshow-caption">Feel a little closer each day</div>
-
                 <div class="slideshow-main">
                     <button class="slideshow-arrow prev" onclick="changeSlide(-1)" aria-label="Previous slide">‹</button>
 
@@ -907,7 +887,6 @@
         // Slideshow functionality
         const slides = document.querySelectorAll('.slide');
         const dotsContainer = document.getElementById('slideshow-dots');
-        const captionEl = document.getElementById('slideshow-caption');
         let currentSlide = 0;
         let autoplayInterval;
 
@@ -937,10 +916,6 @@
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentSlide);
             });
-
-            // Update caption
-            const activeSlide = slides[currentSlide];
-            captionEl.textContent = activeSlide.dataset.caption;
         }
 
         function getPrevIndex() {
