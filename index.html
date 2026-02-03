@@ -325,27 +325,28 @@
             width: 100%;
             height: 100%;
             opacity: 0;
-            transform: scale(0.85);
-            transition: all 0.4s ease;
+            transform: translateX(50px);
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
             pointer-events: none;
+            z-index: 1;
         }
 
         .slide.active {
             opacity: 1;
-            transform: scale(1);
+            transform: translateX(0);
             z-index: 3;
             pointer-events: auto;
         }
 
-        .slide.prev-slide {
-            opacity: 0.5;
-            transform: scale(0.85) translateX(-30%);
+        .slide.exit-left {
+            opacity: 0;
+            transform: translateX(-50px);
             z-index: 2;
         }
 
-        .slide.next-slide {
-            opacity: 0.5;
-            transform: scale(0.85) translateX(30%);
+        .slide.exit-right {
+            opacity: 0;
+            transform: translateX(50px);
             z-index: 2;
         }
 
@@ -904,18 +905,14 @@
             dotsContainer.appendChild(dot);
         });
 
-        function updateSlides() {
+        function updateSlides(direction = 1) {
             const dots = document.querySelectorAll('.slideshow-dot');
 
             slides.forEach((slide, index) => {
-                slide.classList.remove('active', 'prev-slide', 'next-slide');
+                slide.classList.remove('active', 'exit-left', 'exit-right');
 
                 if (index === currentSlide) {
                     slide.classList.add('active');
-                } else if (index === getPrevIndex()) {
-                    slide.classList.add('prev-slide');
-                } else if (index === getNextIndex()) {
-                    slide.classList.add('next-slide');
                 }
             });
 
@@ -924,30 +921,34 @@
             });
         }
 
-        function getPrevIndex() {
-            return (currentSlide - 1 + slides.length) % slides.length;
-        }
-
-        function getNextIndex() {
-            return (currentSlide + 1) % slides.length;
-        }
-
         function changeSlide(direction) {
+            const prevSlide = currentSlide;
             currentSlide = (currentSlide + direction + slides.length) % slides.length;
-            updateSlides();
+
+            // Add exit class to previous slide
+            slides[prevSlide].classList.remove('active');
+            slides[prevSlide].classList.add(direction > 0 ? 'exit-left' : 'exit-right');
+
+            updateSlides(direction);
             resetAutoplay();
         }
 
         function goToSlide(index) {
+            if (index === currentSlide) return;
+            const direction = index > currentSlide ? 1 : -1;
+            const prevSlide = currentSlide;
             currentSlide = index;
-            updateSlides();
+
+            slides[prevSlide].classList.remove('active');
+            slides[prevSlide].classList.add(direction > 0 ? 'exit-left' : 'exit-right');
+
+            updateSlides(direction);
             resetAutoplay();
         }
 
         function startAutoplay() {
             autoplayInterval = setInterval(() => {
-                currentSlide = getNextIndex();
-                updateSlides();
+                changeSlide(1);
             }, 4000);
         }
 
