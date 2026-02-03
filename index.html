@@ -87,29 +87,47 @@
             border-radius: 10px;
         }
 
-        /* Hero Section */
-        .hero {
-            padding: 20px 24px 60px;
-            max-width: 1300px;
+        /* Hero Section - Split Layout */
+        .hero-split {
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+            min-height: 85vh;
+            padding: 60px 24px 80px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        @media (min-width: 1000px) {
-            .hero-grid {
-                grid-template-columns: 1fr 1.2fr;
-                gap: 40px;
+        @media (min-width: 900px) {
+            .hero-split {
+                flex-direction: row;
+                align-items: center;
+                padding: 100px 24px 80px;
             }
         }
 
-        .hero-content {
-            max-width: 440px;
+        .hero-text {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        @media (min-width: 900px) {
+            .hero-text {
+                flex: 0 0 45%;
+                max-width: 45%;
+            }
+        }
+
+        .hero-carousel-wrapper {
+            flex: 1;
+            overflow: hidden;
+            margin-right: -24px;
+        }
+
+        @media (min-width: 900px) {
+            .hero-carousel-wrapper {
+                margin-right: calc(-50vw + 50%);
+            }
         }
 
         .hero-tagline {
@@ -240,48 +258,55 @@
             transform: scale(1.03);
         }
 
-        /* App Screenshots Carousel */
-        .app-carousel {
+        /* Hero Carousel */
+        .hero-carousel {
             display: flex;
-            gap: 16px;
+            gap: 20px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
             padding: 20px 40px 20px 0;
-            align-self: center;
         }
 
-        .app-carousel::-webkit-scrollbar {
+        .hero-carousel::-webkit-scrollbar {
             display: none;
         }
 
-        .app-carousel-card {
+        .hero-carousel-card {
             flex: 0 0 auto;
             background: white;
-            border-radius: 24px;
+            border-radius: 20px;
             padding: 8px;
             border: 1px solid rgba(196, 30, 58, 0.1);
-            box-shadow: 0 4px 20px rgba(196, 30, 58, 0.08);
-            scroll-snap-align: center;
+            box-shadow: 0 8px 30px rgba(196, 30, 58, 0.08);
+            scroll-snap-align: start;
             transition: transform 0.3s;
         }
 
-        .app-carousel-card:hover {
+        .hero-carousel-card:hover {
             transform: scale(1.02);
         }
 
-        .app-carousel-card img {
-            width: 240px;
+        .hero-carousel-card img {
+            width: 260px;
             height: auto;
-            border-radius: 18px;
+            border-radius: 14px;
             display: block;
         }
 
-        @media (max-width: 1000px) {
-            .app-carousel {
-                padding: 20px calc((100vw - 240px) / 2);
-                margin: 0 -24px;
+        @media (max-width: 899px) {
+            .hero-carousel-wrapper {
+                margin-left: -24px;
+                margin-right: -24px;
+            }
+
+            .hero-carousel {
+                padding: 20px 24px;
+            }
+
+            .hero-carousel-card img {
+                width: 240px;
             }
         }
 
@@ -506,10 +531,9 @@
         }
 
         /* Mobile adjustments */
-        @media (max-width: 600px) {
-            .hero-content {
+        @media (max-width: 899px) {
+            .hero-text {
                 text-align: center;
-                margin: 0 auto;
             }
 
             .trust-badges {
@@ -523,10 +547,6 @@
             .store-badges {
                 justify-content: center;
             }
-
-            .phone-mockup {
-                width: 280px;
-            }
         }
     </style>
 </head>
@@ -539,85 +559,84 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-grid">
-            <div class="hero-content fade-in">
-                <h1 class="hero-tagline">Feel a little closer each day</h1>
+    <section class="hero-split">
+        <div class="hero-text fade-in">
+            <h1 class="hero-tagline">Feel a little closer each day</h1>
 
-                <div class="trust-badges">
-                    <div class="trust-badge">
-                        <span class="laurel">🌿</span>
-                        <div class="trust-badge-content">
-                            <div class="trust-badge-small">Trusted</div>
-                            <div class="trust-badge-large">1M</div>
-                            <div class="trust-badge-sub">Couples</div>
-                        </div>
-                        <span class="laurel">🌿</span>
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <span class="laurel">🌿</span>
+                    <div class="trust-badge-content">
+                        <div class="trust-badge-small">Trusted</div>
+                        <div class="trust-badge-large">1M</div>
+                        <div class="trust-badge-sub">Couples</div>
                     </div>
-                    <div class="trust-badge">
-                        <span class="laurel">🌿</span>
-                        <div class="trust-badge-content">
-                            <div class="trust-badge-large">The N°1</div>
-                            <div class="trust-badge-sub">Couple app on TikTok</div>
-                        </div>
-                        <span class="laurel">🌿</span>
+                    <span class="laurel">🌿</span>
+                </div>
+                <div class="trust-badge">
+                    <span class="laurel">🌿</span>
+                    <div class="trust-badge-content">
+                        <div class="trust-badge-large">The N°1</div>
+                        <div class="trust-badge-sub">Couple app on TikTok</div>
                     </div>
-                </div>
-
-                <div class="mini-badges">
-                    <span class="mini-badge">🔥 12K+ couples</span>
-                    <span class="mini-badge">⭐ 4.9 rating</span>
-                </div>
-
-                <div class="premium-section">
-                    <div class="premium-hearts">💕</div>
-                    <h2 class="premium-title">Unlock <span>Premium</span> for your couple</h2>
-                    <p class="premium-subtitle">One subscription. Both partners. Deeper connection.</p>
-                </div>
-
-                <div class="store-badges">
-                    <a href="https://apps.apple.com/app/lovecheck-couple-game/id6504616839" class="store-badge" target="_blank" rel="noopener">
-                        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
-                    </a>
-                    <a href="#" class="store-badge" target="_blank" rel="noopener">
-                        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height: 65px; margin: -10px 0;">
-                    </a>
+                    <span class="laurel">🌿</span>
                 </div>
             </div>
 
-            <!-- App Screenshots Carousel -->
-            <div class="app-carousel fade-in">
-            <div class="app-carousel-card">
-                <img src="screenshots/screen_1.png" alt="LoveCheck - Feel closer each day">
+            <div class="mini-badges">
+                <span class="mini-badge">🔥 12K+ couples</span>
+                <span class="mini-badge">⭐ 4.9 rating</span>
             </div>
-            <div class="app-carousel-card">
-                <img src="screenshots/screen_2.png" alt="LoveCheck - Deep question games">
+
+            <div class="premium-section">
+                <div class="premium-hearts">💕</div>
+                <h2 class="premium-title">Unlock <span>Premium</span> for your couple</h2>
+                <p class="premium-subtitle">One subscription. Both partners. Deeper connection.</p>
             </div>
-            <div class="app-carousel-card">
-                <img src="screenshots/screen_3.png" alt="LoveCheck - Daily Love quests">
-            </div>
-            <div class="app-carousel-card">
-                <img src="screenshots/screen_4.png" alt="LoveCheck - Grow your love streak">
-            </div>
-            <div class="app-carousel-card">
-                <img src="screenshots/screen_5.png" alt="LoveCheck - Couple Quiz">
-            </div>
-            <div class="app-carousel-card">
-                <img src="screenshots/screen_6.png" alt="LoveCheck - Love Doodles">
-            </div>
-            <div class="app-carousel-card">
-                <img src="screenshots/screen_7.png" alt="LoveCheck - Home Screen Widget">
-            </div>
-            <div class="app-carousel-card">
-                <img src="screenshots/screen_8.png" alt="LoveCheck - Song of the moment">
-            </div>
-            <div class="app-carousel-card">
-                <img src="screenshots/screen_9.png" alt="LoveCheck - Love Calendar">
-            </div>
-            <div class="app-carousel-card">
-                <img src="screenshots/screen_10.png" alt="LoveCheck - Earn love points">
+
+            <div class="store-badges">
+                <a href="https://apps.apple.com/app/lovecheck-couple-game/id6504616839" class="store-badge" target="_blank" rel="noopener">
+                    <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
+                </a>
+                <a href="#" class="store-badge" target="_blank" rel="noopener">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height: 65px; margin: -10px 0;">
+                </a>
             </div>
         </div>
+
+        <div class="hero-carousel-wrapper">
+            <div class="hero-carousel fade-in">
+                <div class="hero-carousel-card">
+                    <img src="screenshots/screen_1.png" alt="LoveCheck - Feel closer each day">
+                </div>
+                <div class="hero-carousel-card">
+                    <img src="screenshots/screen_2.png" alt="LoveCheck - Deep question games">
+                </div>
+                <div class="hero-carousel-card">
+                    <img src="screenshots/screen_3.png" alt="LoveCheck - Daily Love quests">
+                </div>
+                <div class="hero-carousel-card">
+                    <img src="screenshots/screen_4.png" alt="LoveCheck - Grow your love streak">
+                </div>
+                <div class="hero-carousel-card">
+                    <img src="screenshots/screen_5.png" alt="LoveCheck - Couple Quiz">
+                </div>
+                <div class="hero-carousel-card">
+                    <img src="screenshots/screen_6.png" alt="LoveCheck - Love Doodles">
+                </div>
+                <div class="hero-carousel-card">
+                    <img src="screenshots/screen_7.png" alt="LoveCheck - Home Screen Widget">
+                </div>
+                <div class="hero-carousel-card">
+                    <img src="screenshots/screen_8.png" alt="LoveCheck - Song of the moment">
+                </div>
+                <div class="hero-carousel-card">
+                    <img src="screenshots/screen_9.png" alt="LoveCheck - Love Calendar">
+                </div>
+                <div class="hero-carousel-card">
+                    <img src="screenshots/screen_10.png" alt="LoveCheck - Earn love points">
+                </div>
+            </div>
         </div>
     </section>
 
