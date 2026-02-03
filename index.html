@@ -110,8 +110,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 48px;
-            padding: 40px 24px 60px;
+            gap: 60px;
+            padding: 60px 40px 80px;
             max-width: 1400px;
             margin: 0 auto;
         }
@@ -120,8 +120,15 @@
             .hero-split {
                 flex-direction: row;
                 align-items: center;
-                padding: 60px 24px 80px;
-                gap: 40px;
+                padding: 80px 60px 100px;
+                gap: 60px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .hero-split {
+                padding: 80px 80px 100px;
+                gap: 80px;
             }
         }
 
@@ -146,88 +153,39 @@
         }
 
         .hero-app-icon {
-            width: 72px;
-            height: 72px;
-            border-radius: 16px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            margin-bottom: 24px;
+            width: 80px;
+            height: 80px;
+            border-radius: 18px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 28px;
         }
 
         .hero-tagline {
             font-family: 'Advercase', Georgia, serif;
-            font-size: clamp(2.25rem, 5vw, 3rem);
+            font-size: clamp(2.5rem, 5vw, 3.25rem);
             font-weight: normal;
             color: #2D2D2D;
-            margin-bottom: 24px;
-            line-height: 1.15;
-            letter-spacing: -0.06em;
-        }
-
-        /* Trust Badges */
-        .trust-badges {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-        }
-
-        .trust-badge {
-            display: flex;
-            align-items: center;
-            gap: 3px;
-            color: #6B5B4F;
-        }
-
-        .laurel {
-            font-size: 1.1rem;
-            color: #A89080;
-        }
-
-        .trust-badge-content {
-            text-align: center;
-        }
-
-        .trust-badge-small {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
-            color: #8B7B6B;
-        }
-
-        .trust-badge-large {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.35rem;
-            font-weight: 800;
-            letter-spacing: -0.06em;
+            margin-bottom: 28px;
             line-height: 1.1;
-            color: #4A4039;
-        }
-
-        .trust-badge-sub {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.55rem;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
-            color: #8B7B6B;
+            letter-spacing: -0.06em;
         }
 
         /* Mini badges */
         .mini-badges {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 32px;
         }
 
         .mini-badge {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             background: #F5EDE6;
-            padding: 5px 10px;
-            border-radius: 16px;
+            padding: 8px 14px;
+            border-radius: 20px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             font-weight: 500;
             color: #5A4A3F;
             letter-spacing: -0.06em;
@@ -235,20 +193,20 @@
 
         /* Premium section */
         .premium-section {
-            margin-bottom: 20px;
+            margin-bottom: 28px;
         }
 
         .premium-hearts {
-            font-size: 0.85rem;
-            margin-bottom: 6px;
+            font-size: 1rem;
+            margin-bottom: 8px;
         }
 
         .premium-title {
             font-family: 'Advercase', Georgia, serif;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: normal;
             color: #2D2D2D;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             letter-spacing: -0.06em;
         }
 
@@ -258,7 +216,7 @@
 
         .premium-subtitle {
             font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #888;
             margin-bottom: 0;
             letter-spacing: -0.06em;
@@ -294,13 +252,13 @@
         .slideshow-caption {
             background: #2D2019;
             color: #fff;
-            padding: 10px 24px;
+            padding: 12px 28px;
             border-radius: 100px;
             font-family: 'Inter', sans-serif;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 600;
             text-align: center;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             letter-spacing: -0.06em;
         }
 
@@ -316,8 +274,8 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 48px;
-            height: 48px;
+            width: 56px;
+            height: 56px;
             background: rgba(0, 0, 0, 0.06);
             border: none;
             outline: none;
@@ -326,7 +284,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             color: #2D2019;
             transition: background 0.2s ease;
             z-index: 10;
@@ -337,32 +295,32 @@
         }
 
         .slideshow-arrow.prev {
-            left: -60px;
+            left: -80px;
         }
 
         .slideshow-arrow.next {
-            right: -60px;
+            right: -80px;
         }
 
         .phone-frame {
             position: relative;
             background: #1a1a1a;
-            border-radius: 45px;
-            padding: 12px;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+            border-radius: 55px;
+            padding: 14px;
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.25);
         }
 
         .phone-screen {
             position: relative;
             overflow: hidden;
-            border-radius: 35px;
+            border-radius: 44px;
             background: #000;
         }
 
         .slides-wrapper {
             position: relative;
-            width: 260px;
-            height: 563px;
+            width: 320px;
+            height: 693px;
         }
 
         .slide {
@@ -400,19 +358,19 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 35px;
+            border-radius: 44px;
         }
 
         .slideshow-dots {
             display: flex;
-            gap: 8px;
-            margin-top: 20px;
+            gap: 10px;
+            margin-top: 28px;
             justify-content: center;
         }
 
         .slideshow-dot {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: rgba(0, 0, 0, 0.15);
             border: none;
@@ -422,8 +380,8 @@
         }
 
         .slideshow-dot.active {
-            width: 24px;
-            border-radius: 4px;
+            width: 28px;
+            border-radius: 5px;
             background: #C41E3A;
         }
 
@@ -432,55 +390,63 @@
         }
 
         @media (max-width: 768px) {
+            .hero-split {
+                padding: 40px 24px 60px;
+            }
+
             .slideshow-container {
                 max-width: 100%;
             }
 
             .slides-wrapper {
-                width: 220px;
-                height: 476px;
+                width: 260px;
+                height: 563px;
             }
 
             .phone-frame {
-                border-radius: 38px;
-                padding: 10px;
+                border-radius: 45px;
+                padding: 12px;
             }
 
             .phone-screen {
-                border-radius: 30px;
+                border-radius: 35px;
             }
 
             .slide img {
-                border-radius: 30px;
+                border-radius: 35px;
             }
 
             .slideshow-arrow {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
+                width: 44px;
+                height: 44px;
+                font-size: 1.3rem;
             }
 
             .slideshow-arrow.prev {
-                left: -48px;
+                left: -56px;
             }
 
             .slideshow-arrow.next {
-                right: -48px;
+                right: -56px;
             }
 
             .slideshow-caption {
-                font-size: 13px;
-                padding: 8px 18px;
+                font-size: 14px;
+                padding: 10px 20px;
             }
         }
 
-        @media (max-width: 420px) {
+        @media (max-width: 480px) {
             .slideshow-arrow.prev {
-                left: -5px;
+                left: 5px;
             }
 
             .slideshow-arrow.next {
-                right: -5px;
+                right: 5px;
+            }
+
+            .slideshow-arrow {
+                background: rgba(255, 255, 255, 0.9);
             }
         }
 
@@ -716,10 +682,6 @@
                 display: block;
             }
 
-            .trust-badges {
-                justify-content: center;
-            }
-
             .mini-badges {
                 justify-content: center;
             }
@@ -743,26 +705,6 @@
         <div class="hero-text fade-in">
             <img src="icon.png" alt="LoveCheck" class="hero-app-icon">
             <h1 class="hero-tagline">Feel a little closer each day</h1>
-
-            <div class="trust-badges">
-                <div class="trust-badge">
-                    <span class="laurel">🌿</span>
-                    <div class="trust-badge-content">
-                        <div class="trust-badge-small">Trusted</div>
-                        <div class="trust-badge-large">1M</div>
-                        <div class="trust-badge-sub">Couples</div>
-                    </div>
-                    <span class="laurel">🌿</span>
-                </div>
-                <div class="trust-badge">
-                    <span class="laurel">🌿</span>
-                    <div class="trust-badge-content">
-                        <div class="trust-badge-large">The N°1</div>
-                        <div class="trust-badge-sub">Couple app on TikTok</div>
-                    </div>
-                    <span class="laurel">🌿</span>
-                </div>
-            </div>
 
             <div class="mini-badges">
                 <span class="mini-badge">🔥 12K+ couples</span>
