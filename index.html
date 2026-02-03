@@ -72,7 +72,7 @@
         .header-logo {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
             font-weight: 600;
@@ -81,8 +81,10 @@
             letter-spacing: -0.06em;
         }
 
-        .header-logo span {
-            color: #C41E3A;
+        .header-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
         }
 
         /* Hero Section */
@@ -319,6 +321,44 @@
             }
         }
 
+        /* App Screenshots Carousel */
+        .app-carousel {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 40px calc((100vw - 220px) / 2) 20px;
+            margin: 0 -24px;
+        }
+
+        .app-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .app-carousel-card {
+            flex: 0 0 auto;
+            background: white;
+            border-radius: 24px;
+            padding: 8px;
+            border: 1px solid rgba(196, 30, 58, 0.1);
+            box-shadow: 0 4px 20px rgba(196, 30, 58, 0.08);
+            scroll-snap-align: center;
+            transition: transform 0.3s;
+        }
+
+        .app-carousel-card:hover {
+            transform: scale(1.03);
+        }
+
+        .app-carousel-card img {
+            width: 220px;
+            height: auto;
+            border-radius: 18px;
+            display: block;
+        }
+
         /* Features Section */
         .features {
             padding: 40px 24px 60px;
@@ -501,6 +541,16 @@
             border-top: 1px solid rgba(0, 0, 0, 0.05);
         }
 
+        .footer-logo {
+            margin-bottom: 16px;
+        }
+
+        .footer-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+        }
+
         .footer-links {
             display: flex;
             justify-content: center;
@@ -558,7 +608,7 @@
     <!-- Header -->
     <header class="header">
         <a href="/" class="header-logo">
-            <span>❤️</span> Love Check
+            <img src="icon.png" alt="LoveCheck" class="header-icon"> Love Check
         </a>
     </header>
 
@@ -616,6 +666,40 @@
                 <div class="notifications">
                     <img src="notifications.png" alt="LoveCheck notifications">
                 </div>
+            </div>
+        </div>
+
+        <!-- App Screenshots Carousel -->
+        <div class="app-carousel fade-in">
+            <div class="app-carousel-card">
+                <img src="screenshots/screen_1.png" alt="LoveCheck - Feel closer each day">
+            </div>
+            <div class="app-carousel-card">
+                <img src="screenshots/screen_2.png" alt="LoveCheck - Deep question games">
+            </div>
+            <div class="app-carousel-card">
+                <img src="screenshots/screen_3.png" alt="LoveCheck - Daily Love quests">
+            </div>
+            <div class="app-carousel-card">
+                <img src="screenshots/screen_4.png" alt="LoveCheck - Grow your love streak">
+            </div>
+            <div class="app-carousel-card">
+                <img src="screenshots/screen_5.png" alt="LoveCheck - Couple Quiz">
+            </div>
+            <div class="app-carousel-card">
+                <img src="screenshots/screen_6.png" alt="LoveCheck - Love Doodles">
+            </div>
+            <div class="app-carousel-card">
+                <img src="screenshots/screen_7.png" alt="LoveCheck - Home Screen Widget">
+            </div>
+            <div class="app-carousel-card">
+                <img src="screenshots/screen_8.png" alt="LoveCheck - Song of the moment">
+            </div>
+            <div class="app-carousel-card">
+                <img src="screenshots/screen_9.png" alt="LoveCheck - Love Calendar">
+            </div>
+            <div class="app-carousel-card">
+                <img src="screenshots/screen_10.png" alt="LoveCheck - Earn love points">
             </div>
         </div>
     </section>
@@ -712,6 +796,9 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
+            <div class="footer-logo">
+                <img src="icon.png" alt="LoveCheck" class="footer-icon">
+            </div>
             <div class="footer-links">
                 <a href="/privacy">Privacy Policy</a>
                 <a href="/terms">Terms of Service</a>
