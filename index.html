@@ -118,16 +118,12 @@
             }
         }
 
-        .hero-carousel-wrapper {
+        .hero-slideshow-wrapper {
             flex: 1;
-            overflow: hidden;
-            margin-right: -24px;
-        }
-
-        @media (min-width: 900px) {
-            .hero-carousel-wrapper {
-                margin-right: calc(-50vw + 50%);
-            }
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .hero-tagline {
@@ -258,55 +254,201 @@
             transform: scale(1.03);
         }
 
-        /* Hero Carousel */
-        .hero-carousel {
+        /* Phone Slideshow */
+        .slideshow-container {
+            position: relative;
             display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            padding: 20px 40px 20px 0;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
         }
 
-        .hero-carousel::-webkit-scrollbar {
-            display: none;
-        }
-
-        .hero-carousel-card {
-            flex: 0 0 auto;
-            background: white;
+        .slideshow-caption {
+            background: rgba(45, 45, 45, 0.9);
+            color: #fff;
+            padding: 12px 24px;
             border-radius: 20px;
-            padding: 8px;
-            border: 1px solid rgba(196, 30, 58, 0.1);
-            box-shadow: 0 8px 30px rgba(196, 30, 58, 0.08);
-            scroll-snap-align: start;
-            transition: transform 0.3s;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: -0.06em;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .hero-carousel-card:hover {
-            transform: scale(1.02);
+        .slideshow-main {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
         }
 
-        .hero-carousel-card img {
+        .slideshow-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #2D2D2D;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .slideshow-arrow:hover {
+            background: #fff;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .slideshow-arrow.prev {
+            left: -20px;
+        }
+
+        .slideshow-arrow.next {
+            right: -20px;
+        }
+
+        .phone-frame {
+            position: relative;
+            background: #1a1a1a;
+            border-radius: 45px;
+            padding: 12px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+        }
+
+        .phone-screen {
+            position: relative;
+            overflow: hidden;
+            border-radius: 35px;
+            background: #000;
+        }
+
+        .slides-wrapper {
+            position: relative;
             width: 260px;
-            height: auto;
-            border-radius: 14px;
-            display: block;
+            height: 563px;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: scale(0.85);
+            transition: all 0.4s ease;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 3;
+            pointer-events: auto;
+        }
+
+        .slide.prev-slide {
+            opacity: 0.5;
+            transform: scale(0.85) translateX(-30%);
+            z-index: 2;
+        }
+
+        .slide.next-slide {
+            opacity: 0.5;
+            transform: scale(0.85) translateX(30%);
+            z-index: 2;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 35px;
+        }
+
+        .slideshow-dots {
+            display: flex;
+            gap: 8px;
+            margin-top: 24px;
+            justify-content: center;
+        }
+
+        .slideshow-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #D4C4B5;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 0;
+        }
+
+        .slideshow-dot.active {
+            background: #C41E3A;
+            transform: scale(1.2);
+        }
+
+        .slideshow-dot:hover {
+            background: #C41E3A;
         }
 
         @media (max-width: 899px) {
-            .hero-carousel-wrapper {
-                margin-left: -24px;
-                margin-right: -24px;
+            .slideshow-container {
+                max-width: 100%;
             }
 
-            .hero-carousel {
-                padding: 20px 24px;
+            .slides-wrapper {
+                width: 220px;
+                height: 476px;
             }
 
-            .hero-carousel-card img {
-                width: 240px;
+            .phone-frame {
+                border-radius: 38px;
+                padding: 10px;
+            }
+
+            .phone-screen {
+                border-radius: 30px;
+            }
+
+            .slide img {
+                border-radius: 30px;
+            }
+
+            .slideshow-arrow {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+
+            .slideshow-arrow.prev {
+                left: 5px;
+            }
+
+            .slideshow-arrow.next {
+                right: 5px;
+            }
+
+            .slideshow-caption {
+                font-size: 0.8rem;
+                padding: 10px 18px;
             }
         }
 
@@ -604,38 +746,54 @@
             </div>
         </div>
 
-        <div class="hero-carousel-wrapper">
-            <div class="hero-carousel fade-in">
-                <div class="hero-carousel-card">
-                    <img src="screenshots/screen_1.png" alt="LoveCheck - Feel closer each day">
+        <div class="hero-slideshow-wrapper fade-in">
+            <div class="slideshow-container">
+                <div class="slideshow-caption" id="slideshow-caption">Feel closer each day</div>
+
+                <div class="slideshow-main">
+                    <button class="slideshow-arrow prev" onclick="changeSlide(-1)">‹</button>
+
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="slides-wrapper">
+                                <div class="slide active" data-caption="Feel closer each day">
+                                    <img src="screenshots/screen_1.png" alt="LoveCheck - Feel closer each day">
+                                </div>
+                                <div class="slide" data-caption="Deep question games">
+                                    <img src="screenshots/screen_2.png" alt="LoveCheck - Deep question games">
+                                </div>
+                                <div class="slide" data-caption="Daily Love quests">
+                                    <img src="screenshots/screen_3.png" alt="LoveCheck - Daily Love quests">
+                                </div>
+                                <div class="slide" data-caption="Grow your love streak">
+                                    <img src="screenshots/screen_4.png" alt="LoveCheck - Grow your love streak">
+                                </div>
+                                <div class="slide" data-caption="Couple Quiz">
+                                    <img src="screenshots/screen_5.png" alt="LoveCheck - Couple Quiz">
+                                </div>
+                                <div class="slide" data-caption="Love Doodles">
+                                    <img src="screenshots/screen_6.png" alt="LoveCheck - Love Doodles">
+                                </div>
+                                <div class="slide" data-caption="Home Screen Widget">
+                                    <img src="screenshots/screen_7.png" alt="LoveCheck - Home Screen Widget">
+                                </div>
+                                <div class="slide" data-caption="Song of the moment">
+                                    <img src="screenshots/screen_8.png" alt="LoveCheck - Song of the moment">
+                                </div>
+                                <div class="slide" data-caption="Love Calendar">
+                                    <img src="screenshots/screen_9.png" alt="LoveCheck - Love Calendar">
+                                </div>
+                                <div class="slide" data-caption="Earn love points">
+                                    <img src="screenshots/screen_10.png" alt="LoveCheck - Earn love points">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="slideshow-arrow next" onclick="changeSlide(1)">›</button>
                 </div>
-                <div class="hero-carousel-card">
-                    <img src="screenshots/screen_2.png" alt="LoveCheck - Deep question games">
-                </div>
-                <div class="hero-carousel-card">
-                    <img src="screenshots/screen_3.png" alt="LoveCheck - Daily Love quests">
-                </div>
-                <div class="hero-carousel-card">
-                    <img src="screenshots/screen_4.png" alt="LoveCheck - Grow your love streak">
-                </div>
-                <div class="hero-carousel-card">
-                    <img src="screenshots/screen_5.png" alt="LoveCheck - Couple Quiz">
-                </div>
-                <div class="hero-carousel-card">
-                    <img src="screenshots/screen_6.png" alt="LoveCheck - Love Doodles">
-                </div>
-                <div class="hero-carousel-card">
-                    <img src="screenshots/screen_7.png" alt="LoveCheck - Home Screen Widget">
-                </div>
-                <div class="hero-carousel-card">
-                    <img src="screenshots/screen_8.png" alt="LoveCheck - Song of the moment">
-                </div>
-                <div class="hero-carousel-card">
-                    <img src="screenshots/screen_9.png" alt="LoveCheck - Love Calendar">
-                </div>
-                <div class="hero-carousel-card">
-                    <img src="screenshots/screen_10.png" alt="LoveCheck - Earn love points">
-                </div>
+
+                <div class="slideshow-dots" id="slideshow-dots"></div>
             </div>
         </div>
     </section>
@@ -764,6 +922,86 @@
         document.querySelectorAll('.fade-in').forEach(el => {
             observer.observe(el);
         });
+
+        // Slideshow functionality
+        const slides = document.querySelectorAll('.slide');
+        const dotsContainer = document.getElementById('slideshow-dots');
+        const captionEl = document.getElementById('slideshow-caption');
+        let currentSlide = 0;
+        let autoplayInterval;
+
+        // Create dots
+        slides.forEach((_, index) => {
+            const dot = document.createElement('button');
+            dot.className = 'slideshow-dot' + (index === 0 ? ' active' : '');
+            dot.onclick = () => goToSlide(index);
+            dotsContainer.appendChild(dot);
+        });
+
+        function updateSlides() {
+            const dots = document.querySelectorAll('.slideshow-dot');
+
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev-slide', 'next-slide');
+
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index === getPrevIndex()) {
+                    slide.classList.add('prev-slide');
+                } else if (index === getNextIndex()) {
+                    slide.classList.add('next-slide');
+                }
+            });
+
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+
+            // Update caption
+            const activeSlide = slides[currentSlide];
+            captionEl.textContent = activeSlide.dataset.caption;
+        }
+
+        function getPrevIndex() {
+            return (currentSlide - 1 + slides.length) % slides.length;
+        }
+
+        function getNextIndex() {
+            return (currentSlide + 1) % slides.length;
+        }
+
+        function changeSlide(direction) {
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            updateSlides();
+            resetAutoplay();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlides();
+            resetAutoplay();
+        }
+
+        function startAutoplay() {
+            autoplayInterval = setInterval(() => {
+                currentSlide = getNextIndex();
+                updateSlides();
+            }, 4000);
+        }
+
+        function resetAutoplay() {
+            clearInterval(autoplayInterval);
+            startAutoplay();
+        }
+
+        // Initialize
+        updateSlides();
+        startAutoplay();
+
+        // Pause autoplay on hover
+        const slideshowContainer = document.querySelector('.slideshow-container');
+        slideshowContainer.addEventListener('mouseenter', () => clearInterval(autoplayInterval));
+        slideshowContainer.addEventListener('mouseleave', startAutoplay);
     </script>
 </body>
 </html>
