@@ -91,9 +91,9 @@
         .hero-split {
             display: flex;
             flex-direction: column;
+            align-items: center;
             gap: 48px;
-            min-height: 85vh;
-            padding: 60px 24px 80px;
+            padding: 40px 24px 60px;
             max-width: 1400px;
             margin: 0 auto;
         }
@@ -102,7 +102,8 @@
             .hero-split {
                 flex-direction: row;
                 align-items: center;
-                padding: 100px 24px 80px;
+                padding: 60px 24px 80px;
+                gap: 40px;
             }
         }
 
@@ -124,6 +125,14 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+        }
+
+        .hero-app-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            margin-bottom: 24px;
         }
 
         .hero-tagline {
@@ -265,20 +274,16 @@
         }
 
         .slideshow-caption {
-            background: rgba(45, 45, 45, 0.9);
+            background: #2D2019;
             color: #fff;
-            padding: 12px 24px;
-            border-radius: 20px;
+            padding: 10px 24px;
+            border-radius: 100px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 500;
+            font-size: 14px;
+            font-weight: 600;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             letter-spacing: -0.06em;
-            min-height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .slideshow-main {
@@ -293,34 +298,32 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 44px;
-            height: 44px;
-            background: rgba(255, 255, 255, 0.95);
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.06);
             border: none;
+            outline: none;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            color: #2D2D2D;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-            transition: all 0.2s ease;
+            font-size: 1.4rem;
+            color: #2D2019;
+            transition: background 0.2s ease;
             z-index: 10;
         }
 
         .slideshow-arrow:hover {
-            background: #fff;
-            transform: translateY(-50%) scale(1.1);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.1);
         }
 
         .slideshow-arrow.prev {
-            left: -20px;
+            left: -60px;
         }
 
         .slideshow-arrow.next {
-            right: -20px;
+            right: -60px;
         }
 
         .phone-frame {
@@ -385,7 +388,7 @@
         .slideshow-dots {
             display: flex;
             gap: 8px;
-            margin-top: 24px;
+            margin-top: 20px;
             justify-content: center;
         }
 
@@ -393,7 +396,7 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: #D4C4B5;
+            background: rgba(0, 0, 0, 0.15);
             border: none;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -401,15 +404,16 @@
         }
 
         .slideshow-dot.active {
-            background: #C41E3A;
-            transform: scale(1.2);
-        }
-
-        .slideshow-dot:hover {
+            width: 24px;
+            border-radius: 4px;
             background: #C41E3A;
         }
 
-        @media (max-width: 899px) {
+        .slideshow-dot:hover:not(.active) {
+            background: rgba(0, 0, 0, 0.25);
+        }
+
+        @media (max-width: 768px) {
             .slideshow-container {
                 max-width: 100%;
             }
@@ -433,22 +437,32 @@
             }
 
             .slideshow-arrow {
-                width: 38px;
-                height: 38px;
-                font-size: 1rem;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
             }
 
             .slideshow-arrow.prev {
-                left: 5px;
+                left: -48px;
             }
 
             .slideshow-arrow.next {
-                right: 5px;
+                right: -48px;
             }
 
             .slideshow-caption {
-                font-size: 0.8rem;
-                padding: 10px 18px;
+                font-size: 13px;
+                padding: 8px 18px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .slideshow-arrow.prev {
+                left: -5px;
+            }
+
+            .slideshow-arrow.next {
+                right: -5px;
             }
         }
 
@@ -678,6 +692,12 @@
                 text-align: center;
             }
 
+            .hero-app-icon {
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+            }
+
             .trust-badges {
                 justify-content: center;
             }
@@ -703,6 +723,7 @@
     <!-- Hero Section -->
     <section class="hero-split">
         <div class="hero-text fade-in">
+            <img src="icon.png" alt="LoveCheck" class="hero-app-icon">
             <h1 class="hero-tagline">Feel a little closer each day</h1>
 
             <div class="trust-badges">
