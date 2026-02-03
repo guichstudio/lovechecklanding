@@ -7,7 +7,7 @@
     <meta name="description" content="The #1 couple app. Daily love quests, couple quizzes, and more. Trusted by 1M+ couples.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -21,17 +21,15 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #FFF8F0;
+            background-color: #FDF8F4;
             color: #2D2D2D;
             line-height: 1.6;
             overflow-x: hidden;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.02em;
         }
 
         h1, h2, h3 {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-weight: 700;
-            letter-spacing: -0.06em;
+            letter-spacing: -0.04em;
         }
 
         .container {
@@ -43,7 +41,7 @@
         /* Fade-in animation */
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(20px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
@@ -52,53 +50,82 @@
             transform: translateY(0);
         }
 
+        /* Header */
+        .header {
+            padding: 16px 24px;
+            text-align: center;
+        }
+
+        .header-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2D2D2D;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .header-logo span {
+            color: #C41E3A;
+        }
+
         /* Hero Section */
         .hero {
-            min-height: 100vh;
-            background: linear-gradient(180deg, #8B0000 0%, #B22234 50%, #C41E3A 100%);
-            display: flex;
+            padding: 40px 24px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 60px 24px 80px;
-            position: relative;
-            overflow: hidden;
+        }
+
+        @media (min-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 60px;
+            }
         }
 
         .hero-content {
-            max-width: 600px;
-            position: relative;
-            z-index: 1;
+            max-width: 480px;
         }
 
         .hero-tagline {
-            font-size: clamp(2.5rem, 8vw, 3.5rem);
-            font-weight: 700;
-            color: #FFFFFF;
-            margin-bottom: 32px;
-            line-height: 1.1;
-            letter-spacing: -0.06em;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(2.5rem, 6vw, 3.25rem);
+            font-weight: 500;
+            font-style: italic;
+            color: #2D2D2D;
+            margin-bottom: 28px;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
         }
 
         /* Trust Badges */
         .trust-badges {
             display: flex;
-            justify-content: center;
-            gap: 32px;
-            margin-bottom: 40px;
+            gap: 24px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
 
         .trust-badge {
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: rgba(255, 255, 255, 0.9);
+            gap: 4px;
+            color: #6B5B4F;
         }
 
         .laurel {
-            font-size: 1.5rem;
-            opacity: 0.8;
+            font-size: 1.25rem;
+            color: #A89080;
         }
 
         .trust-badge-content {
@@ -106,35 +133,105 @@
         }
 
         .trust-badge-small {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            opacity: 0.8;
+            letter-spacing: 0.02em;
+            color: #8B7B6B;
         }
 
         .trust-badge-large {
-            font-size: 1.75rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
             font-weight: 800;
-            letter-spacing: -0.06em;
-            line-height: 1;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            color: #4A4039;
         }
 
         .trust-badge-sub {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            opacity: 0.8;
+            letter-spacing: 0.02em;
+            color: #8B7B6B;
         }
 
-        /* Phone Mockup */
+        /* Mini badges */
+        .mini-badges {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mini-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #F5EDE6;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #5A4A3F;
+        }
+
+        /* Premium section */
+        .premium-section {
+            margin-bottom: 24px;
+        }
+
+        .premium-hearts {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .premium-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #2D2D2D;
+            margin-bottom: 8px;
+            letter-spacing: -0.04em;
+        }
+
+        .premium-title span {
+            color: #C41E3A;
+        }
+
+        .premium-subtitle {
+            font-size: 0.95rem;
+            color: #888;
+            margin-bottom: 0;
+        }
+
+        /* Store Badges */
+        .store-badges {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .store-badge img {
+            height: 44px;
+            border-radius: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        .store-badge:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
         .phone-mockup {
             position: relative;
-            width: 300px;
-            max-width: 90vw;
-            margin: 0 auto;
-            border-radius: 40px;
-            overflow: hidden;
-            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.3);
+            width: 320px;
+            max-width: 100%;
+            z-index: 1;
         }
 
         .phone-mockup img {
@@ -143,51 +240,42 @@
             display: block;
         }
 
-        /* Store Badges */
-        .store-badges {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 40px;
+        .notifications {
+            position: absolute;
+            right: -180px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 220px;
+            z-index: 2;
         }
 
-        .store-badge img {
-            height: 52px;
-            border-radius: 8px;
-            transition: transform 0.2s ease;
+        .notifications img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
-        .store-badge:hover img {
-            transform: scale(1.05);
-        }
-
-        .hero .store-badges .store-badge img {
-            filter: brightness(0) invert(1);
+        @media (max-width: 1100px) {
+            .notifications {
+                display: none;
+            }
         }
 
         /* Features Section */
         .features {
-            padding: 100px 24px;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: clamp(2rem, 5vw, 2.5rem);
-            color: #C41E3A;
-            margin-bottom: 60px;
-            letter-spacing: -0.06em;
+            padding: 60px 24px 80px;
+            background: #FDF8F4;
         }
 
         .features-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 24px;
+            gap: 20px;
             max-width: 900px;
             margin: 0 auto;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 600px) {
             .features-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -195,140 +283,179 @@
 
         .feature-card {
             background: #FFFFFF;
-            border-radius: 24px;
-            padding: 32px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 20px;
+            padding: 28px;
+            transition: transform 0.3s ease;
         }
 
         .feature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(196, 30, 58, 0.1);
+            transform: translateY(-2px);
         }
 
         .feature-icon {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, #FFF0F0 0%, #FFE0E5 100%);
-            border-radius: 16px;
+            width: 48px;
+            height: 48px;
+            background: #FDEEF0;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.75rem;
-            margin-bottom: 20px;
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-icon.yellow {
+            background: #FFF3E0;
+        }
+
+        .feature-icon.pink {
+            background: #FDEEF0;
+        }
+
+        .feature-icon.purple {
+            background: #F3E8F5;
+        }
+
+        .feature-icon.red {
+            background: #FFE8E8;
         }
 
         .feature-title {
-            font-size: 1.25rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
             font-weight: 700;
             color: #2D2D2D;
-            margin-bottom: 12px;
-            letter-spacing: -0.04em;
+            margin-bottom: 8px;
+            letter-spacing: -0.03em;
         }
 
         .feature-description {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #888;
-            line-height: 1.7;
-            letter-spacing: -0.02em;
+            line-height: 1.6;
+            letter-spacing: -0.01em;
         }
 
         /* How It Works Section */
         .how-it-works {
-            padding: 100px 24px;
-            background: linear-gradient(180deg, transparent 0%, rgba(196, 30, 58, 0.03) 100%);
+            padding: 80px 24px;
+            background: linear-gradient(180deg, #F8F2ED 0%, #FDF8F4 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(1.75rem, 4vw, 2.25rem);
+            font-weight: 500;
+            font-style: italic;
+            color: #C41E3A;
+            margin-bottom: 60px;
+            letter-spacing: -0.02em;
         }
 
         .steps {
             display: flex;
             flex-direction: column;
-            gap: 40px;
-            max-width: 600px;
+            gap: 48px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 700px) {
             .steps {
                 flex-direction: row;
-                max-width: 900px;
-                gap: 24px;
+                gap: 32px;
             }
         }
 
         .step {
             flex: 1;
             text-align: center;
-            padding: 32px 24px;
         }
 
         .step-number {
-            width: 64px;
-            height: 64px;
+            width: 48px;
+            height: 48px;
             background: #C41E3A;
             color: #FFFFFF;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            margin: 0 auto 20px;
-            letter-spacing: -0.04em;
+            margin: 0 auto 16px;
+            letter-spacing: -0.02em;
         }
 
         .step-icon {
-            font-size: 2rem;
-            margin-bottom: 8px;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
         }
 
         .step-title {
-            font-size: 1.1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
             font-weight: 700;
             color: #2D2D2D;
-            margin-bottom: 8px;
-            letter-spacing: -0.04em;
+            margin-bottom: 6px;
+            letter-spacing: -0.03em;
         }
 
         .step-description {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #888;
-            letter-spacing: -0.02em;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
         }
 
         /* CTA Section */
         .cta {
-            padding: 100px 24px;
+            padding: 80px 24px;
             text-align: center;
+            background: #FDF8F4;
         }
 
         .cta-title {
-            font-size: clamp(1.75rem, 5vw, 2.25rem);
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(1.75rem, 4vw, 2.25rem);
+            font-weight: 500;
+            font-style: italic;
             color: #C41E3A;
             margin-bottom: 32px;
-            letter-spacing: -0.06em;
+            letter-spacing: -0.02em;
+        }
+
+        .cta .store-badges {
+            justify-content: center;
+        }
+
+        .cta .store-badge img {
+            height: 48px;
         }
 
         /* Footer */
         .footer {
-            padding: 48px 24px;
+            padding: 40px 24px;
             text-align: center;
-            border-top: 1px solid rgba(196, 30, 58, 0.1);
+            background: #FDF8F4;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
             gap: 32px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
 
         .footer-links a {
             color: #888;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: color 0.2s ease;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.01em;
         }
 
         .footer-links a:hover {
@@ -336,64 +463,98 @@
         }
 
         .footer-copyright {
-            font-size: 0.85rem;
-            color: #888;
-            letter-spacing: -0.02em;
+            font-size: 0.8rem;
+            color: #AAA;
+            letter-spacing: -0.01em;
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 480px) {
-            .trust-badges {
-                gap: 20px;
+        /* Mobile adjustments */
+        @media (max-width: 600px) {
+            .hero-content {
+                text-align: center;
+                margin: 0 auto;
             }
 
-            .trust-badge-large {
-                font-size: 1.5rem;
+            .trust-badges {
+                justify-content: center;
+            }
+
+            .mini-badges {
+                justify-content: center;
+            }
+
+            .store-badges {
+                justify-content: center;
             }
 
             .phone-mockup {
-                width: 260px;
+                width: 280px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
+    <header class="header">
+        <a href="/" class="header-logo">
+            <span>❤️</span> Love Check
+        </a>
+    </header>
+
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <h1 class="hero-tagline fade-in">Feel a little closer each day</h1>
+        <div class="hero-grid">
+            <div class="hero-content fade-in">
+                <h1 class="hero-tagline">Feel a little closer each day</h1>
 
-            <div class="trust-badges fade-in">
-                <div class="trust-badge">
-                    <span class="laurel">🌿</span>
-                    <div class="trust-badge-content">
-                        <div class="trust-badge-small">Trusted</div>
-                        <div class="trust-badge-large">1M</div>
-                        <div class="trust-badge-sub">Couples</div>
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <span class="laurel">🌿</span>
+                        <div class="trust-badge-content">
+                            <div class="trust-badge-small">Trusted</div>
+                            <div class="trust-badge-large">1M</div>
+                            <div class="trust-badge-sub">Couples</div>
+                        </div>
+                        <span class="laurel">🌿</span>
                     </div>
-                    <span class="laurel">🌿</span>
+                    <div class="trust-badge">
+                        <span class="laurel">🌿</span>
+                        <div class="trust-badge-content">
+                            <div class="trust-badge-large">The N°1</div>
+                            <div class="trust-badge-sub">Couple app on TikTok</div>
+                        </div>
+                        <span class="laurel">🌿</span>
+                    </div>
                 </div>
-                <div class="trust-badge">
-                    <span class="laurel">🌿</span>
-                    <div class="trust-badge-content">
-                        <div class="trust-badge-large">The N°1</div>
-                        <div class="trust-badge-sub">Couple app on TikTok</div>
-                    </div>
-                    <span class="laurel">🌿</span>
+
+                <div class="mini-badges">
+                    <span class="mini-badge">🔥 12K+ couples</span>
+                    <span class="mini-badge">⭐ 4.9 rating</span>
+                </div>
+
+                <div class="premium-section">
+                    <div class="premium-hearts">💕</div>
+                    <h2 class="premium-title">Unlock <span>Premium</span> for your couple</h2>
+                    <p class="premium-subtitle">One subscription. Both partners. Deeper connection.</p>
+                </div>
+
+                <div class="store-badges">
+                    <a href="https://apps.apple.com/app/lovecheck-couple-game/id6504616839" class="store-badge" target="_blank" rel="noopener">
+                        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
+                    </a>
+                    <a href="#" class="store-badge" target="_blank" rel="noopener">
+                        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height: 65px; margin: -10px 0;">
+                    </a>
                 </div>
             </div>
 
-            <div class="phone-mockup fade-in">
-                <img src="phone-mockup.png" alt="LoveCheck App - 511 days together">
-            </div>
-
-            <div class="store-badges fade-in">
-                <a href="https://apps.apple.com/app/lovecheck-couple-game/id6504616839" class="store-badge" target="_blank" rel="noopener">
-                    <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
-                </a>
-                <a href="#" class="store-badge" target="_blank" rel="noopener">
-                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height: 77px; margin: -12px 0;">
-                </a>
+            <div class="hero-visual fade-in">
+                <div class="phone-mockup">
+                    <img src="phone-mockup.png" alt="LoveCheck App - 511 days together">
+                </div>
+                <div class="notifications">
+                    <img src="notifications.png" alt="LoveCheck notifications">
+                </div>
             </div>
         </div>
     </section>
@@ -401,41 +562,39 @@
     <!-- Features Section -->
     <section class="features">
         <div class="container">
-            <h2 class="section-title fade-in">Everything you need to grow your love</h2>
-
             <div class="features-grid">
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">✨</div>
+                    <div class="feature-icon yellow">✨</div>
                     <h3 class="feature-title">Daily Love Quests</h3>
                     <p class="feature-description">Complete daily quests together: Memory Flash, Song of the Day, Mood of the Day. Earn Love Points and level up!</p>
                 </div>
 
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">💕</div>
+                    <div class="feature-icon pink">💕</div>
                     <h3 class="feature-title">Days Together Counter</h3>
                     <p class="feature-description">Track your journey with a beautiful heart counter showing your days, streaks, and love level.</p>
                 </div>
 
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">💬</div>
+                    <div class="feature-icon purple">💬</div>
                     <h3 class="feature-title">Couple Quiz</h3>
                     <p class="feature-description">Answer meaningful questions together — Classic or Spicy mode. Discover what makes your relationship unique.</p>
                 </div>
 
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">📅</div>
+                    <div class="feature-icon red">📅</div>
                     <h3 class="feature-title">Love Calendar</h3>
                     <p class="feature-description">Celebrate moments that matter. See your love history day by day, track completed and missed days.</p>
                 </div>
 
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">🎨</div>
+                    <div class="feature-icon yellow">👋</div>
                     <h3 class="feature-title">Love Doodles</h3>
                     <p class="feature-description">Draw cute love sketches and send them to your partner.</p>
                 </div>
 
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">📱</div>
+                    <div class="feature-icon pink">📱</div>
                     <h3 class="feature-title">Home Screen Widget</h3>
                     <p class="feature-description">Add a cute LoveCheck widget to your Home Screen to always feel connected.</p>
                 </div>
@@ -458,7 +617,7 @@
 
                 <div class="step fade-in">
                     <div class="step-number">2</div>
-                    <div class="step-icon">💌</div>
+                    <div class="step-icon">💕</div>
                     <h3 class="step-title">Invite your partner</h3>
                     <p class="step-description">Send them an invite link to connect your accounts</p>
                 </div>
@@ -483,7 +642,7 @@
                     <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
                 </a>
                 <a href="#" class="store-badge" target="_blank" rel="noopener">
-                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height: 77px; margin: -12px 0;">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height: 72px; margin: -12px 0;">
                 </a>
             </div>
         </div>
