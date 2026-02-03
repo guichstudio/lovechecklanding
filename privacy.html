@@ -7,8 +7,16 @@
     <meta name="description" content="Privacy Policy for LoveCheck - The #1 couple app.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        @font-face {
+            font-family: 'Advercase';
+            src: url('fonts/Advercase.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -21,86 +29,114 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #FFF8F0;
+            background-color: #FDF8F4;
             color: #2D2D2D;
             line-height: 1.7;
+            letter-spacing: -0.06em;
         }
 
         h1, h2, h3 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-weight: 600;
+            letter-spacing: -0.06em;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 720px;
             margin: 0 auto;
             padding: 0 24px;
         }
 
         /* Header */
         .header {
-            padding: 24px;
+            padding: 16px 24px;
             text-align: center;
-            border-bottom: 1px solid rgba(196, 30, 58, 0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .header-logo {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.75rem;
-            color: #C41E3A;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2D2D2D;
             text-decoration: none;
+            letter-spacing: -0.06em;
+        }
+
+        .header-logo span {
+            color: #C41E3A;
         }
 
         /* Content */
         .content {
-            padding: 60px 24px;
+            padding: 48px 24px;
         }
 
         .page-title {
-            font-size: 2.5rem;
+            font-family: 'Advercase', Georgia, serif;
+            font-size: 2.25rem;
             color: #C41E3A;
-            margin-bottom: 16px;
+            margin-bottom: 8px;
             text-align: center;
+            letter-spacing: -0.06em;
         }
 
         .last-updated {
             text-align: center;
             color: #888;
-            font-size: 0.9rem;
-            margin-bottom: 48px;
+            font-size: 0.85rem;
+            margin-bottom: 40px;
+            letter-spacing: -0.06em;
         }
 
         .legal-content {
             background: #FFFFFF;
-            border-radius: 24px;
-            padding: 48px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border-radius: 20px;
+            padding: 40px;
         }
 
         .legal-content h2 {
-            font-size: 1.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
             color: #C41E3A;
-            margin-top: 40px;
-            margin-bottom: 16px;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            letter-spacing: -0.06em;
         }
 
         .legal-content h2:first-child {
             margin-top: 0;
         }
 
-        .legal-content p {
-            margin-bottom: 16px;
+        .legal-content h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
             color: #2D2D2D;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            letter-spacing: -0.06em;
+        }
+
+        .legal-content p {
+            margin-bottom: 14px;
+            color: #2D2D2D;
+            font-size: 0.9rem;
+            letter-spacing: -0.06em;
         }
 
         .legal-content ul {
-            margin-bottom: 16px;
-            padding-left: 24px;
+            margin-bottom: 14px;
+            padding-left: 20px;
         }
 
         .legal-content li {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #2D2D2D;
+            font-size: 0.9rem;
+            letter-spacing: -0.06em;
         }
 
         .legal-content a {
@@ -112,26 +148,33 @@
             text-decoration: underline;
         }
 
+        .legal-content strong {
+            font-weight: 600;
+        }
+
         /* Footer */
         .footer {
-            padding: 48px 24px;
+            padding: 32px 24px;
             text-align: center;
-            border-top: 1px solid rgba(196, 30, 58, 0.1);
+            background: #FDF8F4;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 32px;
-            margin-bottom: 24px;
+            gap: 28px;
+            margin-bottom: 16px;
             flex-wrap: wrap;
         }
 
         .footer-links a {
+            font-family: 'Inter', sans-serif;
             color: #888;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             transition: color 0.2s ease;
+            letter-spacing: -0.06em;
         }
 
         .footer-links a:hover {
@@ -139,17 +182,19 @@
         }
 
         .footer-copyright {
-            font-size: 0.85rem;
-            color: #888;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            color: #AAA;
+            letter-spacing: -0.06em;
         }
 
         @media (max-width: 480px) {
             .page-title {
-                font-size: 2rem;
+                font-size: 1.75rem;
             }
 
             .legal-content {
-                padding: 32px 24px;
+                padding: 28px 20px;
             }
         }
     </style>
@@ -157,7 +202,9 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <a href="/" class="header-logo">LoveCheck</a>
+        <a href="/" class="header-logo">
+            <span>❤️</span> Love Check
+        </a>
     </header>
 
     <!-- Content -->
@@ -167,108 +214,125 @@
             <p class="last-updated">Last updated: February 3, 2026</p>
 
             <div class="legal-content">
-                <h2>Introduction</h2>
-                <p>Welcome to LoveCheck ("we," "our," or "us"). We are committed to protecting your privacy and personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application LoveCheck (the "App").</p>
-                <p>Please read this Privacy Policy carefully. By using the App, you agree to the collection and use of information in accordance with this policy.</p>
+                <p>LoveCheck ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, store, and share your personal information when you use the LoveCheck mobile application.</p>
 
-                <h2>Information We Collect</h2>
-                <p>We collect information that you provide directly to us and information that is automatically collected when you use our App.</p>
+                <h2>1. Information We Collect</h2>
 
-                <h3 style="font-size: 1.1rem; margin-top: 24px; margin-bottom: 12px; color: #2D2D2D;">Account Information</h3>
+                <h3>Account Information:</h3>
                 <ul>
                     <li>Email address</li>
-                    <li>Name or display name</li>
-                    <li>Profile information</li>
+                    <li>Display name</li>
+                    <li>Profile photo (optional)</li>
+                    <li>Date your relationship began</li>
                 </ul>
 
-                <h3 style="font-size: 1.1rem; margin-top: 24px; margin-bottom: 12px; color: #2D2D2D;">Relationship Data</h3>
+                <h3>Relationship Data:</h3>
                 <ul>
-                    <li>Partner connection/link information</li>
+                    <li>Partner connection (linked accounts)</li>
                     <li>Days together counter</li>
-                    <li>Relationship start date</li>
-                    <li>Love level and points</li>
+                    <li>Love Points, levels, and streaks</li>
                 </ul>
 
-                <h3 style="font-size: 1.1rem; margin-top: 24px; margin-bottom: 12px; color: #2D2D2D;">Usage Data</h3>
+                <h3>Usage Data:</h3>
                 <ul>
-                    <li>Quiz answers and responses</li>
-                    <li>Daily quest completion status</li>
-                    <li>Love points earned</li>
-                    <li>App interaction patterns</li>
-                    <li>Love doodles and sketches</li>
+                    <li>Couple quiz answers and results</li>
+                    <li>Daily quest completions (Mood of the Day, Song of the Day, Memory Flash, Love Notes)</li>
+                    <li>Love doodles and drawings</li>
+                    <li>Music links shared through Song of the Day</li>
+                    <li>In-app interactions and feature usage</li>
                 </ul>
 
-                <h2>How We Use Your Information</h2>
-                <p>We use the information we collect to:</p>
+                <h3>Technical Data:</h3>
                 <ul>
-                    <li>Provide, maintain, and improve our App</li>
-                    <li>Connect you with your partner within the App</li>
-                    <li>Track your relationship milestones and progress</li>
-                    <li>Process and display quiz results and daily quests</li>
-                    <li>Send you notifications related to App features</li>
-                    <li>Respond to your comments, questions, and support requests</li>
-                    <li>Monitor and analyze usage trends to improve user experience</li>
+                    <li>Device type and operating system</li>
+                    <li>App version</li>
+                    <li>Crash logs and performance data</li>
+                    <li>General location (country level, for analytics purposes only)</li>
                 </ul>
 
-                <h2>Data Storage and Security</h2>
-                <p>Your data is stored securely using industry-standard encryption and security measures. We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
-                <p>We retain your personal information for as long as your account is active or as needed to provide you services. If you wish to cancel your account or request that we no longer use your information, please contact us at <a href="mailto:hello@lovecheck.us">hello@lovecheck.us</a>.</p>
-
-                <h2>Data Sharing</h2>
-                <p><strong>We do not sell your personal information to third parties.</strong></p>
-                <p>We may share your information only in the following circumstances:</p>
+                <h2>2. How We Use Your Information</h2>
+                <p>We use your information to:</p>
                 <ul>
-                    <li>With your linked partner (information you choose to share within the App)</li>
-                    <li>With service providers who assist us in operating the App</li>
-                    <li>If required by law or to protect our rights</li>
-                    <li>In connection with a merger, acquisition, or sale of assets</li>
+                    <li>Provide and maintain the LoveCheck service</li>
+                    <li>Connect you with your partner within the app</li>
+                    <li>Track your love journey (days together, streaks, love points, levels)</li>
+                    <li>Deliver daily quests and personalized content</li>
+                    <li>Process in-app purchases and subscriptions</li>
+                    <li>Send push notifications (with your consent) about daily quests, partner activity, and streaks</li>
+                    <li>Improve the app's features and user experience</li>
+                    <li>Provide customer support</li>
+                    <li>Ensure the security of your account</li>
                 </ul>
 
-                <h2>Your Rights and Choices</h2>
-                <p>You have the right to:</p>
+                <h2>3. Data Storage and Security</h2>
+                <p>Your data is stored securely using industry-standard cloud infrastructure with encryption in transit and at rest. We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
+
+                <h2>4. Data Sharing</h2>
+                <p><strong>We do not sell, trade, or rent your personal information to third parties.</strong></p>
+                <p>We may share your data only in the following limited circumstances:</p>
                 <ul>
-                    <li>Access the personal information we hold about you</li>
-                    <li>Request correction of inaccurate information</li>
-                    <li>Request deletion of your personal information</li>
-                    <li>Opt-out of marketing communications</li>
-                    <li>Export your data in a portable format</li>
+                    <li><strong>With your partner:</strong> Certain data is shared with your linked partner as part of the app's core functionality (e.g., quiz answers, doodles, moods, love notes, streaks)</li>
+                    <li><strong>Service providers:</strong> We use third-party services for hosting, analytics, and payment processing that may have access to your data solely to perform services on our behalf</li>
+                    <li><strong>Legal requirements:</strong> We may disclose your information if required to do so by law or in response to valid legal requests</li>
+                    <li><strong>Business transfers:</strong> In the event of a merger, acquisition, or sale of assets, your data may be transferred as part of that transaction</li>
                 </ul>
-                <p>To exercise any of these rights, please contact us at <a href="mailto:hello@lovecheck.us">hello@lovecheck.us</a>.</p>
 
-                <h2>GDPR Compliance (European Users)</h2>
-                <p>If you are a resident of the European Economic Area (EEA), you have certain data protection rights under the General Data Protection Regulation (GDPR). We aim to take reasonable steps to allow you to correct, amend, delete, or limit the use of your Personal Data.</p>
-                <p>The legal bases for processing your information include:</p>
+                <h2>5. Third-Party Services</h2>
+                <p>LoveCheck integrates with or relies on the following third-party services:</p>
                 <ul>
-                    <li>Your consent</li>
-                    <li>Performance of a contract with you</li>
-                    <li>Compliance with legal obligations</li>
-                    <li>Our legitimate interests</li>
+                    <li><strong>Apple App Store / Google Play Store</strong> for subscription management and payments</li>
+                    <li><strong>Firebase</strong> for authentication, data storage, and analytics</li>
+                    <li><strong>Spotify / Apple Music</strong> links (we do not access your music accounts; only links you voluntarily share are stored)</li>
                 </ul>
+                <p>Each third-party service has its own privacy policy, and we encourage you to review them.</p>
 
-                <h2>CCPA Compliance (California Residents)</h2>
-                <p>If you are a California resident, the California Consumer Privacy Act (CCPA) provides you with specific rights regarding your personal information:</p>
+                <h2>6. Your Rights</h2>
+                <p>Depending on your location, you may have the following rights regarding your personal data:</p>
                 <ul>
-                    <li><strong>Right to Know:</strong> You can request information about the categories and specific pieces of personal information we have collected about you.</li>
-                    <li><strong>Right to Delete:</strong> You can request deletion of your personal information, subject to certain exceptions.</li>
-                    <li><strong>Right to Non-Discrimination:</strong> We will not discriminate against you for exercising your CCPA rights.</li>
+                    <li><strong>Access:</strong> Request a copy of the personal data we hold about you</li>
+                    <li><strong>Rectification:</strong> Request correction of inaccurate data</li>
+                    <li><strong>Deletion:</strong> Request deletion of your personal data</li>
+                    <li><strong>Portability:</strong> Request your data in a portable format</li>
+                    <li><strong>Objection:</strong> Object to certain processing of your data</li>
+                    <li><strong>Withdrawal of consent:</strong> Withdraw consent for data processing at any time</li>
                 </ul>
-                <p>To make a request under CCPA, please email us at <a href="mailto:hello@lovecheck.us">hello@lovecheck.us</a>.</p>
+                <p>To exercise any of these rights, please contact us at <a href="mailto:hello@lovecheck.us">hello@lovecheck.us</a>. We will respond to your request within 30 days.</p>
 
-                <h2>Data Deletion Requests</h2>
-                <p>You can request complete deletion of your account and all associated data by emailing <a href="mailto:hello@lovecheck.us">hello@lovecheck.us</a>. We will process your request within 30 days and confirm once your data has been permanently deleted from our systems.</p>
+                <h2>7. Data Retention</h2>
+                <p>We retain your personal data for as long as your account is active or as needed to provide you with the service. If you delete your account, we will delete your personal data within 30 days, except where we are required to retain it for legal or regulatory purposes.</p>
 
-                <h2>Children's Privacy</h2>
-                <p>Our App is not intended for children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us.</p>
+                <h2>8. Children's Privacy</h2>
+                <p>LoveCheck is not intended for use by children under the age of 16. We do not knowingly collect personal information from children under 16. If we become aware that we have collected data from a child under 16, we will take steps to delete that information promptly.</p>
 
-                <h2>Changes to This Privacy Policy</h2>
-                <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date. You are advised to review this Privacy Policy periodically for any changes.</p>
+                <h2>9. European Users (GDPR)</h2>
+                <p>If you are located in the European Economic Area (EEA), you have additional rights under the General Data Protection Regulation (GDPR):</p>
+                <ul>
+                    <li><strong>Legal basis:</strong> We process your data based on your consent (account creation), contractual necessity (providing the service), and legitimate interest (improving the app)</li>
+                    <li><strong>Data transfers:</strong> If your data is transferred outside the EEA, we ensure appropriate safeguards are in place</li>
+                    <li><strong>Supervisory authority:</strong> You have the right to lodge a complaint with your local data protection authority</li>
+                </ul>
 
-                <h2>Contact Us</h2>
-                <p>If you have any questions about this Privacy Policy or our data practices, please contact us at:</p>
-                <p>
-                    <strong>LoveCheck</strong><br>
-                    Email: <a href="mailto:hello@lovecheck.us">hello@lovecheck.us</a>
-                </p>
+                <h2>10. California Users (CCPA)</h2>
+                <p>If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA):</p>
+                <ul>
+                    <li>The right to know what personal information we collect and how it is used</li>
+                    <li>The right to request deletion of your personal information</li>
+                    <li>The right to opt out of the sale of your personal information (note: we do not sell personal information)</li>
+                    <li>The right to non-discrimination for exercising your privacy rights</li>
+                </ul>
+
+                <h2>11. Push Notifications</h2>
+                <p>LoveCheck may send push notifications about daily quests, partner activity, streak reminders, and other app features. You can manage or disable notifications at any time through your device settings.</p>
+
+                <h2>12. Cookies and Tracking</h2>
+                <p>The LoveCheck mobile app does not use cookies. We may use standard mobile analytics tools to understand app usage patterns and improve the service. You can opt out of analytics tracking through the app settings.</p>
+
+                <h2>13. Changes to This Policy</h2>
+                <p>We may update this Privacy Policy from time to time. We will notify you of any significant changes via email and/or in-app notification. Continued use of the app after changes constitutes acceptance of the updated policy.</p>
+
+                <h2>14. Contact Us</h2>
+                <p>If you have any questions, concerns, or requests regarding this Privacy Policy or your personal data, please contact us at:</p>
+                <p><strong>Email:</strong> <a href="mailto:hello@lovecheck.us">hello@lovecheck.us</a></p>
             </div>
         </div>
     </main>
