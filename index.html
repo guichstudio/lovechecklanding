@@ -240,87 +240,6 @@
             transform: scale(1.03);
         }
 
-        /* Hero Visual */
-        .hero-visual {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            padding-right: 120px;
-        }
-
-        .phone-mockup {
-            position: relative;
-            width: 340px;
-            max-width: 100%;
-            z-index: 2;
-        }
-
-        .phone-mockup img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .notifications {
-            position: absolute;
-            right: -60px;
-            top: 45%;
-            transform: translateY(-50%);
-            width: 240px;
-            z-index: 1;
-        }
-
-        .notifications img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Connection line from phone to notifications */
-        .hero-visual::after {
-            content: '';
-            position: absolute;
-            right: 80px;
-            top: 25%;
-            width: 180px;
-            height: 200px;
-            border: 2px solid #C41E3A;
-            border-left: none;
-            border-bottom: none;
-            border-radius: 0 100px 0 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        @media (max-width: 1200px) {
-            .hero-visual {
-                padding-right: 80px;
-            }
-
-            .notifications {
-                right: -40px;
-                width: 200px;
-            }
-
-            .hero-visual::after {
-                display: none;
-            }
-        }
-
-        @media (max-width: 1000px) {
-            .hero-visual {
-                padding-right: 0;
-            }
-
-            .notifications {
-                display: none;
-            }
-
-            .hero-visual::after {
-                display: none;
-            }
-        }
-
         /* App Screenshots Carousel */
         .app-carousel {
             display: flex;
@@ -329,8 +248,8 @@
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
-            padding: 40px calc((100vw - 220px) / 2) 20px;
-            margin: 0 -24px;
+            padding: 20px 40px 20px 0;
+            align-self: center;
         }
 
         .app-carousel::-webkit-scrollbar {
@@ -349,14 +268,21 @@
         }
 
         .app-carousel-card:hover {
-            transform: scale(1.03);
+            transform: scale(1.02);
         }
 
         .app-carousel-card img {
-            width: 220px;
+            width: 240px;
             height: auto;
             border-radius: 18px;
             display: block;
+        }
+
+        @media (max-width: 1000px) {
+            .app-carousel {
+                padding: 20px calc((100vw - 240px) / 2);
+                margin: 0 -24px;
+            }
         }
 
         /* Features Section */
@@ -659,18 +585,8 @@
                 </div>
             </div>
 
-            <div class="hero-visual fade-in">
-                <div class="phone-mockup">
-                    <img src="phone-mockup.png" alt="LoveCheck App - 511 days together">
-                </div>
-                <div class="notifications">
-                    <img src="notifications.png" alt="LoveCheck notifications">
-                </div>
-            </div>
-        </div>
-
-        <!-- App Screenshots Carousel -->
-        <div class="app-carousel fade-in">
+            <!-- App Screenshots Carousel -->
+            <div class="app-carousel fade-in">
             <div class="app-carousel-card">
                 <img src="screenshots/screen_1.png" alt="LoveCheck - Feel closer each day">
             </div>
@@ -701,6 +617,7 @@
             <div class="app-carousel-card">
                 <img src="screenshots/screen_10.png" alt="LoveCheck - Earn love points">
             </div>
+        </div>
         </div>
     </section>
 
