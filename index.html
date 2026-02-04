@@ -325,28 +325,45 @@
             width: 100%;
             height: 100%;
             opacity: 0;
-            transform: scale(0.85);
-            transition: all 0.4s ease;
+            transform: translateX(0);
             pointer-events: none;
+            z-index: 1;
         }
 
         .slide.active {
             opacity: 1;
-            transform: scale(1);
-            z-index: 3;
+            transform: translateX(0);
+            z-index: 2;
             pointer-events: auto;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
 
-        .slide.prev-slide {
-            opacity: 0.5;
-            transform: scale(0.85) translateX(-30%);
-            z-index: 2;
+        /* Entering from right (going next) */
+        .slide.enter-from-right {
+            opacity: 0;
+            transform: translateX(60px);
         }
 
-        .slide.next-slide {
-            opacity: 0.5;
-            transform: scale(0.85) translateX(30%);
-            z-index: 2;
+        /* Entering from left (going prev) */
+        .slide.enter-from-left {
+            opacity: 0;
+            transform: translateX(-60px);
+        }
+
+        /* Exiting to left (going next) */
+        .slide.exit-to-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            z-index: 1;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        /* Exiting to right (going prev) */
+        .slide.exit-to-right {
+            opacity: 0;
+            transform: translateX(60px);
+            z-index: 1;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
 
         .slide img {
@@ -895,6 +912,8 @@
         const dotsContainer = document.getElementById('slideshow-dots');
         let currentSlide = 0;
         let autoplayInterval;
+        let isAnimating = false;
+        const ANIMATION_DURATION = 500;
 
         // Create dots
         slides.forEach((_, index) => {
@@ -904,50 +923,67 @@
             dotsContainer.appendChild(dot);
         });
 
-        function updateSlides() {
+        function updateDots() {
             const dots = document.querySelectorAll('.slideshow-dot');
-
-            slides.forEach((slide, index) => {
-                slide.classList.remove('active', 'prev-slide', 'next-slide');
-
-                if (index === currentSlide) {
-                    slide.classList.add('active');
-                } else if (index === getPrevIndex()) {
-                    slide.classList.add('prev-slide');
-                } else if (index === getNextIndex()) {
-                    slide.classList.add('next-slide');
-                }
-            });
-
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentSlide);
             });
         }
 
-        function getPrevIndex() {
-            return (currentSlide - 1 + slides.length) % slides.length;
-        }
+        function transitionSlide(fromIndex, toIndex, direction) {
+            if (isAnimating || fromIndex === toIndex) return;
+            isAnimating = true;
 
-        function getNextIndex() {
-            return (currentSlide + 1) % slides.length;
+            const fromSlide = slides[fromIndex];
+            const toSlide = slides[toIndex];
+
+            // Clear all transition classes
+            slides.forEach(slide => {
+                slide.classList.remove('active', 'enter-from-right', 'enter-from-left', 'exit-to-left', 'exit-to-right');
+            });
+
+            // Set starting position for entering slide (no transition yet)
+            toSlide.classList.add(direction > 0 ? 'enter-from-right' : 'enter-from-left');
+
+            // Force reflow to ensure starting position is applied
+            toSlide.offsetHeight;
+
+            // Now animate both slides
+            fromSlide.classList.add(direction > 0 ? 'exit-to-left' : 'exit-to-right');
+            toSlide.classList.remove('enter-from-right', 'enter-from-left');
+            toSlide.classList.add('active');
+
+            currentSlide = toIndex;
+            updateDots();
+
+            // Unlock after animation completes
+            setTimeout(() => {
+                isAnimating = false;
+                // Clean up exit classes
+                fromSlide.classList.remove('exit-to-left', 'exit-to-right');
+            }, ANIMATION_DURATION);
         }
 
         function changeSlide(direction) {
-            currentSlide = (currentSlide + direction + slides.length) % slides.length;
-            updateSlides();
+            if (isAnimating) return;
+            const nextIndex = (currentSlide + direction + slides.length) % slides.length;
+            transitionSlide(currentSlide, nextIndex, direction);
             resetAutoplay();
         }
 
         function goToSlide(index) {
-            currentSlide = index;
-            updateSlides();
+            if (isAnimating || index === currentSlide) return;
+            const direction = index > currentSlide ? 1 : -1;
+            transitionSlide(currentSlide, index, direction);
             resetAutoplay();
         }
 
         function startAutoplay() {
             autoplayInterval = setInterval(() => {
-                currentSlide = getNextIndex();
-                updateSlides();
+                if (!isAnimating) {
+                    const nextIndex = (currentSlide + 1) % slides.length;
+                    transitionSlide(currentSlide, nextIndex, 1);
+                }
             }, 4000);
         }
 
@@ -956,8 +992,8 @@
             startAutoplay();
         }
 
-        // Initialize
-        updateSlides();
+        // Initialize - just set first slide as active
+        slides[0].classList.add('active');
         startAutoplay();
 
         // Pause autoplay on hover
