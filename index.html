@@ -26,10 +26,25 @@
     <!-- Theme Color -->
     <meta name="theme-color" content="#FDF8F4">
 
+    <!-- Preload critical resources -->
+    <link rel="preload" href="icon.png" as="image">
+    <link rel="preload" href="fonts/Advercase.otf" as="font" type="font/otf" crossorigin>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --color-bg: #FDF8F4;
+            --color-text: #2D2D2D;
+            --color-primary: #C41E3A;
+            --color-muted: #888;
+            --color-card: #FFFFFF;
+            --spacing: -0.06em;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+        }
+
         @font-face {
             font-family: 'Advercase';
             src: url('fonts/Advercase.otf') format('opentype');
@@ -50,20 +65,15 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #FDF8F4;
-            color: #2D2D2D;
+            background-color: var(--color-bg);
+            color: var(--color-text);
             line-height: 1.6;
             overflow-x: hidden;
-            letter-spacing: -0.06em;
+            letter-spacing: var(--spacing);
         }
 
-        h1, h2, h3, .section-title, .cta-title, .hero-tagline {
+        h1, h2, h3 {
             font-family: 'Advercase', Georgia, serif;
-            letter-spacing: -0.06em;
-        }
-
-        p, span, a, div {
-            letter-spacing: -0.06em;
         }
 
         .container {
@@ -94,12 +104,10 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-family: 'Inter', sans-serif;
             font-size: 1rem;
             font-weight: 600;
-            color: #2D2D2D;
+            color: var(--color-text);
             text-decoration: none;
-            letter-spacing: -0.06em;
         }
 
         .header-icon {
@@ -164,13 +172,11 @@
         }
 
         .hero-tagline {
-            font-family: 'Advercase', Georgia, serif;
             font-size: clamp(2.5rem, 5vw, 3.25rem);
             font-weight: normal;
-            color: #2D2D2D;
+            color: var(--color-text);
             margin-bottom: 28px;
             line-height: 1.1;
-            letter-spacing: -0.06em;
         }
 
         /* Mini badges */
@@ -187,11 +193,9 @@
             background: #F5EDE6;
             padding: 8px 14px;
             border-radius: 20px;
-            font-family: 'Inter', sans-serif;
             font-size: 0.8rem;
             font-weight: 500;
             color: #5A4A3F;
-            letter-spacing: -0.06em;
         }
 
         /* Premium section */
@@ -200,24 +204,20 @@
         }
 
         .premium-title {
-            font-family: 'Advercase', Georgia, serif;
             font-size: 1.6rem;
             font-weight: normal;
-            color: #2D2D2D;
+            color: var(--color-text);
             margin-bottom: 8px;
-            letter-spacing: -0.06em;
         }
 
         .premium-title span {
-            color: #C41E3A;
+            color: var(--color-primary);
         }
 
         .premium-subtitle {
-            font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
-            color: #888;
+            color: var(--color-muted);
             margin-bottom: 0;
-            letter-spacing: -0.06em;
         }
 
         /* Store Badges */
@@ -393,7 +393,7 @@
         .slideshow-dot.active {
             width: 28px;
             border-radius: 5px;
-            background: #C41E3A;
+            background: var(--color-primary);
         }
 
         .slideshow-dot:hover:not(.active) {
@@ -477,8 +477,8 @@
         }
 
         .feature-card {
-            background: #FFFFFF;
-            border-radius: 16px;
+            background: var(--color-card);
+            border-radius: var(--radius-lg);
             padding: 24px;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -493,7 +493,7 @@
             width: 44px;
             height: 44px;
             background: #FDEEF0;
-            border-radius: 12px;
+            border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -518,20 +518,16 @@
         }
 
         .feature-title {
-            font-family: 'Inter', sans-serif;
             font-size: 1rem;
             font-weight: 700;
-            color: #2D2D2D;
+            color: var(--color-text);
             margin-bottom: 6px;
-            letter-spacing: -0.06em;
         }
 
         .feature-description {
-            font-family: 'Inter', sans-serif;
             font-size: 0.85rem;
-            color: #888;
+            color: var(--color-muted);
             line-height: 1.55;
-            letter-spacing: -0.06em;
         }
 
         /* CTA Banner */
@@ -547,30 +543,26 @@
         }
 
         .cta-banner h3 {
-            font-family: 'Advercase', Georgia, serif;
             font-size: 1.5rem;
             color: #fff;
             margin-bottom: 12px;
-            letter-spacing: -0.06em;
         }
 
         .cta-banner p {
             font-size: 0.95rem;
             color: rgba(255, 255, 255, 0.9);
-            letter-spacing: -0.06em;
             margin-bottom: 20px;
         }
 
         .cta-banner-btn {
             display: inline-block;
             background: #fff;
-            color: #C41E3A;
+            color: var(--color-primary);
             font-weight: 600;
             font-size: 0.95rem;
             padding: 14px 32px;
             border-radius: 50px;
             text-decoration: none;
-            letter-spacing: -0.06em;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
@@ -587,12 +579,10 @@
 
         .section-title {
             text-align: center;
-            font-family: 'Advercase', Georgia, serif;
             font-size: clamp(1.5rem, 4vw, 2rem);
             font-weight: normal;
-            color: #C41E3A;
+            color: var(--color-primary);
             margin-bottom: 50px;
-            letter-spacing: -0.06em;
         }
 
         .steps {
@@ -618,17 +608,15 @@
         .step-number {
             width: 44px;
             height: 44px;
-            background: #C41E3A;
+            background: var(--color-primary);
             color: #FFFFFF;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Inter', sans-serif;
             font-size: 1.1rem;
             font-weight: 700;
             margin: 0 auto 14px;
-            letter-spacing: -0.06em;
         }
 
         .step-icon {
@@ -637,20 +625,16 @@
         }
 
         .step-title {
-            font-family: 'Inter', sans-serif;
             font-size: 0.95rem;
             font-weight: 700;
-            color: #2D2D2D;
+            color: var(--color-text);
             margin-bottom: 4px;
-            letter-spacing: -0.06em;
         }
 
         .step-description {
-            font-family: 'Inter', sans-serif;
             font-size: 0.8rem;
-            color: #888;
+            color: var(--color-muted);
             line-height: 1.5;
-            letter-spacing: -0.06em;
         }
 
         /* CTA Section */
@@ -661,12 +645,10 @@
         }
 
         .cta-title {
-            font-family: 'Advercase', Georgia, serif;
             font-size: clamp(1.5rem, 4vw, 2rem);
             font-weight: normal;
-            color: #C41E3A;
+            color: var(--color-primary);
             margin-bottom: 28px;
-            letter-spacing: -0.06em;
         }
 
         .cta .store-badges {
@@ -700,23 +682,19 @@
         }
 
         .footer-links a {
-            font-family: 'Inter', sans-serif;
-            color: #888;
+            color: var(--color-muted);
             text-decoration: none;
             font-size: 0.8rem;
             transition: color 0.2s ease;
-            letter-spacing: -0.06em;
         }
 
         .footer-links a:hover {
-            color: #C41E3A;
+            color: var(--color-primary);
         }
 
         .footer-copyright {
-            font-family: 'Inter', sans-serif;
             font-size: 0.75rem;
             color: #AAA;
-            letter-spacing: -0.06em;
         }
 
         /* Mobile adjustments */
@@ -787,31 +765,31 @@
                                     <img src="screenshots/screen_1.jpg" alt="LoveCheck - Feel a little closer each day">
                                 </div>
                                 <div class="slide">
-                                    <img src="screenshots/screen_2.jpg" alt="LoveCheck - Deep question games">
+                                    <img src="screenshots/screen_2.jpg" alt="LoveCheck - Deep question games" loading="lazy">
                                 </div>
                                 <div class="slide">
-                                    <img src="screenshots/screen_3.jpg" alt="LoveCheck - Daily Love">
+                                    <img src="screenshots/screen_3.jpg" alt="LoveCheck - Daily Love" loading="lazy">
                                 </div>
                                 <div class="slide">
-                                    <img src="screenshots/screen_4.jpg" alt="LoveCheck - Days together">
+                                    <img src="screenshots/screen_4.jpg" alt="LoveCheck - Days together" loading="lazy">
                                 </div>
                                 <div class="slide">
-                                    <img src="screenshots/screen_5.jpg" alt="LoveCheck - Couple Quiz">
+                                    <img src="screenshots/screen_5.jpg" alt="LoveCheck - Couple Quiz" loading="lazy">
                                 </div>
                                 <div class="slide">
-                                    <img src="screenshots/screen_6.jpg" alt="LoveCheck - Doodle of the Day">
+                                    <img src="screenshots/screen_6.jpg" alt="LoveCheck - Doodle of the Day" loading="lazy">
                                 </div>
                                 <div class="slide">
-                                    <img src="screenshots/screen_7.jpg" alt="LoveCheck - Home Screen Widget">
+                                    <img src="screenshots/screen_7.jpg" alt="LoveCheck - Home Screen Widget" loading="lazy">
                                 </div>
                                 <div class="slide">
-                                    <img src="screenshots/screen_8.jpg" alt="LoveCheck - Song of the moment">
+                                    <img src="screenshots/screen_8.jpg" alt="LoveCheck - Song of the moment" loading="lazy">
                                 </div>
                                 <div class="slide">
-                                    <img src="screenshots/screen_9.jpg" alt="LoveCheck - Love Calendar">
+                                    <img src="screenshots/screen_9.jpg" alt="LoveCheck - Love Calendar" loading="lazy">
                                 </div>
                                 <div class="slide">
-                                    <img src="screenshots/screen_10.jpg" alt="LoveCheck - Earn love points">
+                                    <img src="screenshots/screen_10.jpg" alt="LoveCheck - Earn love points" loading="lazy">
                                 </div>
                             </div>
                         </div>
