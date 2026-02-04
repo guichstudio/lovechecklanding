@@ -537,24 +537,46 @@
         /* CTA Banner */
         .cta-banner {
             text-align: center;
-            padding: 32px 24px;
-            background: #FDF8F4;
+            padding: 48px 24px;
+            background: linear-gradient(135deg, #C41E3A 0%, #E84860 100%);
+        }
+
+        .cta-banner-content {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .cta-banner h3 {
+            font-family: 'Advercase', Georgia, serif;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 12px;
+            letter-spacing: -0.06em;
         }
 
         .cta-banner p {
             font-size: 0.95rem;
-            color: #666;
+            color: rgba(255, 255, 255, 0.9);
             letter-spacing: -0.06em;
+            margin-bottom: 20px;
         }
 
-        .cta-banner a {
+        .cta-banner-btn {
+            display: inline-block;
+            background: #fff;
             color: #C41E3A;
             font-weight: 600;
+            font-size: 0.95rem;
+            padding: 14px 32px;
+            border-radius: 50px;
             text-decoration: none;
+            letter-spacing: -0.06em;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .cta-banner a:hover {
-            text-decoration: underline;
+        .cta-banner-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         }
 
         /* How It Works Section */
@@ -848,7 +870,11 @@
 
     <!-- CTA Banner -->
     <div class="cta-banner fade-in">
-        <p>Not sure about your relationship? <a href="https://lovecheck.us" target="_blank" rel="noopener">lovecheck.us</a></p>
+        <div class="cta-banner-content">
+            <h3>Doubts about your relationship?</h3>
+            <p>Take our free compatibility test and get clarity in 3 minutes.</p>
+            <a href="https://lovecheck.us" target="_blank" rel="noopener" class="cta-banner-btn">Take the free test →</a>
+        </div>
     </div>
 
     <!-- How It Works Section -->
