@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will Your Relationship Last? — Free Compatibility Test | LoveCheck</title>
+    <meta name="description" content="Take the #1 relationship compatibility test. AI-powered analysis based on behavioral psychology. 1.2M+ predictions made. Get your score in 3 minutes.">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Will Your Relationship Last? Take the Test">
+    <meta property="og:description" content="AI-powered relationship analysis based on behavioral psychology. 1.2M+ predictions made. Free 3-minute test.">
+    <meta property="og:image" content="https://lovecheck.us/icon.png">
+    <meta property="og:url" content="https://lovecheck.us/traffic">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Will Your Relationship Last? Take the Test">
+    <meta name="twitter:description" content="AI-powered relationship analysis. 1.2M+ predictions. Free 3-minute test.">
+    <meta name="twitter:image" content="https://lovecheck.us/icon.png">
+
+    <meta name="theme-color" content="#FDF8F4">
+
+    <link rel="preload" href="fonts/Advercase.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #FDF8F4;
+            --text: #2D2D2D;
+            --primary: #C41E3A;
+            --primary-light: #E84860;
+            --muted: #888;
+            --card: #FFFFFF;
+            --radius: 16px;
+        }
+
+        @font-face {
+            font-family: 'Advercase';
+            src: url('fonts/Advercase.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            letter-spacing: -0.06em;
+        }
+
+        h1, h2, h3 { font-family: 'Advercase', Georgia, serif; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Header ── */
+        .header {
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+        }
+        .header-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+        }
+        .header-cta {
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 10px 22px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            letter-spacing: -0.02em;
+        }
+        .header-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(196, 30, 58, 0.3);
+        }
+
+        /* ── Hero ── */
+        .hero {
+            text-align: center;
+            padding: 60px 24px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(196, 30, 58, 0.08);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 28px;
+            letter-spacing: -0.02em;
+        }
+        .hero h1 {
+            font-size: clamp(2.8rem, 7vw, 4.5rem);
+            line-height: 1.05;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+        .hero h1 span {
+            color: var(--primary);
+        }
+        .hero-sub {
+            font-size: 1.15rem;
+            color: var(--muted);
+            max-width: 520px;
+            margin: 0 auto 36px;
+            line-height: 1.5;
+            letter-spacing: -0.03em;
+        }
+        .hero-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 18px 48px;
+            border-radius: 60px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            letter-spacing: -0.02em;
+        }
+        .hero-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(196, 30, 58, 0.35);
+        }
+        .hero-micro {
+            margin-top: 16px;
+            font-size: 0.8rem;
+            color: #bbb;
+            letter-spacing: -0.02em;
+        }
+
+        /* ── Social Proof Bar ── */
+        .proof-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 32px;
+            padding: 32px 24px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .proof-item {
+            text-align: center;
+        }
+        .proof-number {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -0.04em;
+        }
+        .proof-label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            letter-spacing: -0.02em;
+        }
+
+        /* ── How It Works ── */
+        .how {
+            padding: 80px 24px;
+        }
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 56px;
+            color: var(--text);
+        }
+        .section-title span { color: var(--primary); }
+        .steps-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        @media (min-width: 700px) {
+            .steps-row { grid-template-columns: repeat(3, 1fr); }
+        }
+        .step-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+        }
+        .step-num {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin: 0 auto 16px;
+        }
+        .step-emoji {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+        .step-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+        .step-card p {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* ── Challenge Section ── */
+        .challenge {
+            padding: 80px 24px;
+            background: linear-gradient(135deg, #C41E3A 0%, #E84860 100%);
+            text-align: center;
+        }
+        .challenge h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: #fff;
+            margin-bottom: 12px;
+        }
+        .challenge-sub {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.85);
+            max-width: 500px;
+            margin: 0 auto 36px;
+            line-height: 1.5;
+        }
+        .challenge-box {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.12);
+            border-radius: var(--radius);
+            padding: 32px;
+            backdrop-filter: blur(10px);
+        }
+        .challenge-input-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .challenge-input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+            letter-spacing: -0.03em;
+        }
+        .challenge-input::placeholder { color: rgba(255,255,255,0.5); }
+        .challenge-input:focus { border-color: #fff; }
+        .challenge-btn {
+            padding: 14px 28px;
+            background: #fff;
+            color: var(--primary);
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: transform 0.2s, box-shadow 0.2s;
+            letter-spacing: -0.02em;
+            white-space: nowrap;
+        }
+        .challenge-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        .challenge-link-box {
+            display: none;
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-top: 16px;
+        }
+        .challenge-link-box.show { display: block; }
+        .challenge-link-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .challenge-link-url {
+            flex: 1;
+            font-size: 0.85rem;
+            color: #fff;
+            word-break: break-all;
+            text-align: left;
+            line-height: 1.4;
+        }
+        .challenge-copy-btn {
+            padding: 8px 18px;
+            background: #fff;
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+            transition: transform 0.2s;
+        }
+        .challenge-copy-btn:hover { transform: scale(1.03); }
+        .challenge-share {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .share-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: transform 0.2s;
+            text-decoration: none;
+        }
+        .share-btn:hover { transform: scale(1.1); }
+        .share-btn.whatsapp { background: #25D366; color: #fff; }
+        .share-btn.imessage { background: #34C759; color: #fff; }
+        .share-btn.tiktok { background: #000; color: #fff; }
+        .share-btn.twitter { background: #1DA1F2; color: #fff; }
+        .challenge-hint {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* ── Reactions Grid ── */
+        .reactions {
+            padding: 80px 24px;
+        }
+        .reactions-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        @media (min-width: 600px) {
+            .reactions-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 900px) {
+            .reactions-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        .reaction-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+        .reaction-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .reaction-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .reaction-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .reaction-platform {
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+        .reaction-text {
+            font-size: 0.9rem;
+            color: #444;
+            line-height: 1.55;
+            letter-spacing: -0.02em;
+        }
+        .reaction-score {
+            display: inline-block;
+            margin-top: 10px;
+            background: rgba(196, 30, 58, 0.08);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* ── Score Preview ── */
+        .score-preview {
+            padding: 80px 24px;
+            background: linear-gradient(180deg, #F5EEE8 0%, #FDF8F4 100%);
+        }
+        .score-card {
+            max-width: 400px;
+            margin: 0 auto;
+            background: var(--card);
+            border-radius: 24px;
+            padding: 40px 32px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+        }
+        .score-ring {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 24px;
+            position: relative;
+        }
+        .score-ring svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+        .score-ring-bg {
+            fill: none;
+            stroke: #f0e8e0;
+            stroke-width: 10;
+        }
+        .score-ring-fill {
+            fill: none;
+            stroke: var(--primary);
+            stroke-width: 10;
+            stroke-linecap: round;
+            stroke-dasharray: 408;
+            stroke-dashoffset: 408;
+            transition: stroke-dashoffset 2s ease-out;
+        }
+        .score-ring-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .score-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            letter-spacing: -0.04em;
+        }
+        .score-percent {
+            font-size: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .score-label {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+        .score-breakdown {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        .breakdown-item {
+            text-align: center;
+        }
+        .breakdown-val {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .breakdown-label {
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+        .score-cta {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 14px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            letter-spacing: -0.02em;
+        }
+        .score-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(196, 30, 58, 0.3);
+        }
+
+        /* ── FAQ / SEO ── */
+        .faq {
+            padding: 80px 24px;
+        }
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        @media (min-width: 700px) {
+            .faq-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        .faq-item {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+        .faq-q {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+            letter-spacing: -0.03em;
+        }
+        .faq-a {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* ── Final CTA ── */
+        .final-cta {
+            padding: 80px 24px;
+            text-align: center;
+            background: var(--bg);
+        }
+        .final-cta h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+        .final-cta h2 span { color: var(--primary); }
+        .final-cta-sub {
+            font-size: 1rem;
+            color: var(--muted);
+            margin-bottom: 32px;
+        }
+        .final-btn-row {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            letter-spacing: -0.02em;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(196, 30, 58, 0.35);
+        }
+        .btn-outline {
+            display: inline-block;
+            border: 2px solid var(--text);
+            color: var(--text);
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 14px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: transform 0.2s, background 0.2s;
+            letter-spacing: -0.02em;
+        }
+        .btn-outline:hover {
+            transform: translateY(-2px);
+            background: rgba(0,0,0,0.03);
+        }
+
+        /* ── Footer ── */
+        .footer {
+            padding: 32px 24px;
+            text-align: center;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        .footer-logo-img {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--primary); }
+        .footer-copy {
+            font-size: 0.75rem;
+            color: #aaa;
+        }
+
+        /* ── Animated counter ── */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .pulse { animation: pulse 2s ease-in-out infinite; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="/" class="header-logo">
+            <img src="icon.png" alt="LoveCheck" class="header-icon"> LoveCheck
+        </a>
+        <a href="https://lovecheck.us" class="header-cta">Take the Test</a>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero fade-in">
+        <div class="hero-badge">1,200,000+ predictions made</div>
+        <h1>Will your relationship <span>survive?</span></h1>
+        <p class="hero-sub">AI-powered compatibility analysis based on behavioral psychology. Get your prediction in 3 minutes. Free.</p>
+        <a href="https://lovecheck.us" class="hero-btn">Take the Free Test</a>
+        <p class="hero-micro">No signup required. Takes 3 minutes.</p>
+    </section>
+
+    <!-- Social Proof -->
+    <div class="proof-bar fade-in">
+        <div class="proof-item">
+            <div class="proof-number" data-target="1200000" data-suffix="+">0</div>
+            <div class="proof-label">Predictions Made</div>
+        </div>
+        <div class="proof-item">
+            <div class="proof-number" data-target="89" data-suffix="%">0</div>
+            <div class="proof-label">Accuracy Rate</div>
+        </div>
+        <div class="proof-item">
+            <div class="proof-number" data-target="3" data-suffix=" min">0</div>
+            <div class="proof-label">Average Time</div>
+        </div>
+        <div class="proof-item">
+            <div class="proof-number" data-target="47" data-suffix="%">0</div>
+            <div class="proof-label">Share With Partner</div>
+        </div>
+    </div>
+
+    <!-- How It Works -->
+    <section class="how">
+        <div class="container">
+            <h2 class="section-title fade-in">How <span>it works</span></h2>
+            <div class="steps-row">
+                <div class="step-card fade-in">
+                    <div class="step-num">1</div>
+                    <div class="step-emoji">📝</div>
+                    <h3>Answer 15 Questions</h3>
+                    <p>Honest questions about your relationship dynamics, communication, and daily habits.</p>
+                </div>
+                <div class="step-card fade-in">
+                    <div class="step-num">2</div>
+                    <div class="step-emoji">🧠</div>
+                    <h3>AI Analyzes Patterns</h3>
+                    <p>Our model identifies compatibility signals based on behavioral psychology research.</p>
+                </div>
+                <div class="step-card fade-in">
+                    <div class="step-num">3</div>
+                    <div class="step-emoji">💔</div>
+                    <h3>Get Your Prediction</h3>
+                    <p>Receive your compatibility score, timeline prediction, and personalized insights.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Score Preview -->
+    <section class="score-preview">
+        <div class="container">
+            <h2 class="section-title fade-in">Your score looks like <span>this</span></h2>
+            <div class="score-card fade-in">
+                <div class="score-ring" id="score-ring">
+                    <svg viewBox="0 0 140 140">
+                        <circle class="score-ring-bg" cx="70" cy="70" r="65"/>
+                        <circle class="score-ring-fill" id="score-fill" cx="70" cy="70" r="65"/>
+                    </svg>
+                    <div class="score-ring-text">
+                        <div class="score-number" id="score-value">0</div>
+                        <div class="score-percent">%</div>
+                    </div>
+                </div>
+                <p class="score-label">Compatibility Score</p>
+                <div class="score-breakdown">
+                    <div class="breakdown-item">
+                        <div class="breakdown-val">High</div>
+                        <div class="breakdown-label">Communication</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <div class="breakdown-val">Medium</div>
+                        <div class="breakdown-label">Trust</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <div class="breakdown-val">Strong</div>
+                        <div class="breakdown-label">Future Alignment</div>
+                    </div>
+                </div>
+                <a href="https://lovecheck.us" class="score-cta">Get Your Real Score</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenge Your Partner -->
+    <section class="challenge" id="challenge">
+        <h2 class="fade-in">Challenge your partner</h2>
+        <p class="challenge-sub fade-in">Take the test, then send it to your partner. Compare scores side-by-side. Who's more confident?</p>
+        <div class="challenge-box fade-in">
+            <div class="challenge-input-row">
+                <input type="text" class="challenge-input" id="challenge-name" placeholder="Your first name">
+                <button class="challenge-btn" onclick="generateChallenge()">Generate Link</button>
+            </div>
+            <div class="challenge-link-box" id="challenge-result">
+                <div class="challenge-link-row">
+                    <div class="challenge-link-url" id="challenge-url"></div>
+                    <button class="challenge-copy-btn" onclick="copyChallenge()">Copy</button>
+                </div>
+                <div class="challenge-share" id="challenge-share"></div>
+            </div>
+            <p class="challenge-hint">Send the link to your partner. When they take the test, you'll see both scores.</p>
+        </div>
+    </section>
+
+    <!-- Reactions -->
+    <section class="reactions">
+        <div class="container">
+            <h2 class="section-title fade-in">Real <span>reactions</span></h2>
+            <div class="reactions-grid">
+                <div class="reaction-card fade-in">
+                    <div class="reaction-header">
+                        <div class="reaction-avatar" style="background:#E84860">S</div>
+                        <div>
+                            <div class="reaction-name">@sarah_xo</div>
+                            <div class="reaction-platform">TikTok</div>
+                        </div>
+                    </div>
+                    <p class="reaction-text">"My boyfriend scored 34% and I've been staring at him differently all day. This thing is TOO accurate."</p>
+                    <span class="reaction-score">Score: 34%</span>
+                </div>
+
+                <div class="reaction-card fade-in">
+                    <div class="reaction-header">
+                        <div class="reaction-avatar" style="background:#1DA1F2">M</div>
+                        <div>
+                            <div class="reaction-name">@marcus_j</div>
+                            <div class="reaction-platform">Twitter</div>
+                        </div>
+                    </div>
+                    <p class="reaction-text">"We both got 91%. Been together 6 years. This thing validated what we already knew."</p>
+                    <span class="reaction-score">Score: 91%</span>
+                </div>
+
+                <div class="reaction-card fade-in">
+                    <div class="reaction-header">
+                        <div class="reaction-avatar" style="background:#FF4500">A</div>
+                        <div>
+                            <div class="reaction-name">anonymous_user</div>
+                            <div class="reaction-platform">Reddit</div>
+                        </div>
+                    </div>
+                    <p class="reaction-text">"Took this as a joke with my gf. Got 52%. We had the most honest conversation we've had in months. Actually grateful."</p>
+                    <span class="reaction-score">Score: 52%</span>
+                </div>
+
+                <div class="reaction-card fade-in">
+                    <div class="reaction-header">
+                        <div class="reaction-avatar" style="background:#E1306C">J</div>
+                        <div>
+                            <div class="reaction-name">@jen.and.mike</div>
+                            <div class="reaction-platform">Instagram</div>
+                        </div>
+                    </div>
+                    <p class="reaction-text">"He got 88%, I got 73%. Now he won't stop bringing it up. Thanks LoveCheck."</p>
+                    <span class="reaction-score">His: 88% / Hers: 73%</span>
+                </div>
+
+                <div class="reaction-card fade-in">
+                    <div class="reaction-header">
+                        <div class="reaction-avatar" style="background:#25D366">D</div>
+                        <div>
+                            <div class="reaction-name">@dani_rae</div>
+                            <div class="reaction-platform">TikTok</div>
+                        </div>
+                    </div>
+                    <p class="reaction-text">"3 million views later and my DMs are FLOODED with people's scores. This app broke TikTok."</p>
+                    <span class="reaction-score">Viral</span>
+                </div>
+
+                <div class="reaction-card fade-in">
+                    <div class="reaction-header">
+                        <div class="reaction-avatar" style="background:#8B5CF6">R</div>
+                        <div>
+                            <div class="reaction-name">@ryannn</div>
+                            <div class="reaction-platform">Twitter</div>
+                        </div>
+                    </div>
+                    <p class="reaction-text">"Bro this quiz predicted we'd break up within 6 months. That was 7 months ago. We broke up last week. I'm shook."</p>
+                    <span class="reaction-score">Score: 28%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ / SEO -->
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title fade-in">Questions? <span>Answers.</span></h2>
+            <div class="faq-grid">
+                <div class="faq-item fade-in">
+                    <div class="faq-q">Is the relationship compatibility test free?</div>
+                    <div class="faq-a">Yes, the core prediction is completely free. No signup, no credit card. Take the test and get your score in 3 minutes.</div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-q">How accurate is the compatibility score?</div>
+                    <div class="faq-a">Our AI model analyzes behavioral patterns identified in relationship psychology research. 89% of users say their score accurately reflects their relationship dynamics.</div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-q">Can my partner take it too?</div>
+                    <div class="faq-a">Absolutely. Use the "Challenge Your Partner" feature to generate a link. When both of you complete the test, you can compare scores side by side.</div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-q">What does a low score mean?</div>
+                    <div class="faq-a">A lower score doesn't mean your relationship is doomed — it highlights areas where you might want to invest more energy. Many couples use their results as a starting point for deeper conversations.</div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-q">Is my data private?</div>
+                    <div class="faq-a">100%. We don't store personal data or share results. Your answers are processed in real-time and not saved to any database.</div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-q">How is this different from other relationship quizzes?</div>
+                    <div class="faq-a">Most quizzes are generic personality tests. LoveCheck uses AI and behavioral psychology to analyze specific relationship dynamics — communication patterns, conflict resolution, and future alignment.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <h2 class="fade-in">Ready to find <span>out?</span></h2>
+        <p class="final-cta-sub fade-in">1.2 million couples already know their score. Your turn.</p>
+        <div class="final-btn-row fade-in">
+            <a href="https://lovecheck.us" class="btn-primary">Take the Free Test</a>
+            <a href="#challenge" class="btn-outline">Challenge Your Partner</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <img src="icon.png" alt="LoveCheck" class="footer-logo-img">
+            <div class="footer-links">
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="mailto:hello@lovecheck.us">Support</a>
+                <a href="/delete-account">Delete Account</a>
+            </div>
+            <p class="footer-copy">&copy; 2026 LoveCheck. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Fade-in observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Animated counters
+        function animateCounters() {
+            document.querySelectorAll('.proof-number[data-target]').forEach(el => {
+                const target = parseInt(el.dataset.target);
+                const suffix = el.dataset.suffix || '';
+                const duration = 2000;
+                const start = Date.now();
+
+                function tick() {
+                    const elapsed = Date.now() - start;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const ease = 1 - Math.pow(1 - progress, 3);
+                    const current = Math.round(target * ease);
+
+                    if (target >= 10000) {
+                        el.textContent = (current / 1000000).toFixed(1) + 'M' + suffix;
+                    } else {
+                        el.textContent = current.toLocaleString() + suffix;
+                    }
+
+                    if (progress < 1) requestAnimationFrame(tick);
+                }
+                tick();
+            });
+        }
+
+        // Trigger counters when proof bar is visible
+        const proofBar = document.querySelector('.proof-bar');
+        const counterObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                animateCounters();
+                counterObserver.unobserve(proofBar);
+            }
+        }, { threshold: 0.5 });
+        counterObserver.observe(proofBar);
+
+        // Score ring animation
+        const scoreRing = document.getElementById('score-ring');
+        const scoreFill = document.getElementById('score-fill');
+        const scoreValue = document.getElementById('score-value');
+        const targetScore = 78;
+
+        const ringObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                const circumference = 2 * Math.PI * 65;
+                const offset = circumference - (targetScore / 100) * circumference;
+                scoreFill.style.strokeDashoffset = offset;
+
+                // Animate number
+                let current = 0;
+                const duration = 2000;
+                const start = Date.now();
+                function tickScore() {
+                    const elapsed = Date.now() - start;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const ease = 1 - Math.pow(1 - progress, 3);
+                    current = Math.round(targetScore * ease);
+                    scoreValue.textContent = current;
+                    if (progress < 1) requestAnimationFrame(tickScore);
+                }
+                tickScore();
+                ringObserver.unobserve(scoreRing);
+            }
+        }, { threshold: 0.5 });
+        ringObserver.observe(scoreRing);
+
+        // Challenge partner
+        function generateChallenge() {
+            const name = document.getElementById('challenge-name').value.trim();
+            if (!name) {
+                document.getElementById('challenge-name').focus();
+                return;
+            }
+
+            const slug = name.toLowerCase().replace(/[^a-z0-9]/g, '');
+            const id = Math.random().toString(36).substring(2, 8);
+            const url = `https://lovecheck.us/?challenge=${slug}_${id}`;
+
+            document.getElementById('challenge-url').textContent = url;
+
+            const shareDiv = document.getElementById('challenge-share');
+            const encodedText = encodeURIComponent(`${name} challenged you to a relationship test! Think you'll score higher? 😏`);
+            const encodedUrl = encodeURIComponent(url);
+
+            shareDiv.innerHTML = `
+                <a href="https://wa.me/?text=${encodedText}%20${encodedUrl}" target="_blank" class="share-btn whatsapp" title="WhatsApp">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </a>
+                <a href="sms:?body=${encodedText}%20${encodedUrl}" class="share-btn imessage" title="iMessage">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/></svg>
+                </a>
+                <a href="https://twitter.com/intent/tweet?text=${encodedText}%20${encodedUrl}" target="_blank" class="share-btn twitter" title="Twitter">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            `;
+
+            document.getElementById('challenge-result').classList.add('show');
+        }
+
+        function copyChallenge() {
+            const url = document.getElementById('challenge-url').textContent;
+            navigator.clipboard.writeText(url);
+            const btn = document.querySelector('.challenge-copy-btn');
+            btn.textContent = 'Copied!';
+            setTimeout(() => btn.textContent = 'Copy', 2000);
+        }
+
+        // Enter key on challenge input
+        document.getElementById('challenge-name').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') generateChallenge();
+        });
+    </script>
+</body>
+</html>
