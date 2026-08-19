@@ -136,7 +136,26 @@
         /* Header */
         .header {
             padding: 16px 24px;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-nav a {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--color-text);
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 50px;
+            transition: color 0.2s ease, background 0.2s ease;
+        }
+
+        .header-nav a:hover {
+            color: var(--color-primary);
+            background: rgba(196, 30, 58, 0.06);
         }
 
         .header-logo {
@@ -610,6 +629,83 @@
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         }
 
+        /* Blog Teaser Section */
+        .blog-teaser {
+            padding: 64px 24px;
+        }
+
+        .blog-teaser .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .blog-teaser-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .blog-teaser-card {
+            display: block;
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 20px;
+            padding: 28px;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .blog-teaser-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(196, 30, 58, 0.10);
+        }
+
+        .blog-teaser-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            color: var(--color-primary);
+            background: #FCE9EC;
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-bottom: 14px;
+        }
+
+        .blog-teaser-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            line-height: 1.3;
+        }
+
+        .blog-teaser-more {
+            color: var(--color-primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .blog-teaser-all {
+            display: inline-block;
+            margin-top: 28px;
+            color: var(--color-primary);
+            font-weight: 700;
+            font-size: 0.98rem;
+            text-decoration: none;
+        }
+
+        .blog-teaser-all:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 640px) {
+            .blog-teaser-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* How It Works Section */
         .how-it-works {
             padding: 60px 24px 80px;
@@ -764,6 +860,9 @@
         <a href="/" class="header-logo">
             <img src="icon.png" alt="LoveCheck" class="header-icon"> Love Check
         </a>
+        <nav class="header-nav">
+            <a href="/blog">Blog</a>
+        </nav>
     </header>
 
     <!-- Hero Section -->
@@ -893,6 +992,28 @@
             <a href="https://lovecheck.us" target="_blank" rel="noopener" class="cta-banner-btn">Take the test →</a>
         </div>
     </div>
+
+    <!-- Blog Teaser Section -->
+    <section class="blog-teaser">
+        <div class="container">
+            <h2 class="section-title fade-in">From the blog</h2>
+            <div class="blog-teaser-grid">
+                <a href="/blog/couple-therapy-exercises-at-home" class="blog-teaser-card fade-in">
+                    <span class="blog-teaser-tag">Relationship exercises</span>
+                    <h3>7 Couple Therapy Exercises You Can Do at Home</h3>
+                    <span class="blog-teaser-more">Read article →</span>
+                </a>
+                <a href="/blog/questions-to-feel-closer-to-your-partner" class="blog-teaser-card fade-in">
+                    <span class="blog-teaser-tag">Conversation starters</span>
+                    <h3>50 Questions to Ask Your Partner to Feel Closer</h3>
+                    <span class="blog-teaser-more">Read article →</span>
+                </a>
+            </div>
+            <div style="text-align: center;">
+                <a href="/blog" class="blog-teaser-all">Visit the blog →</a>
+            </div>
+        </div>
+    </section>
 
     <!-- How It Works Section -->
     <section class="how-it-works">
