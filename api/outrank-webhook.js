@@ -24,6 +24,17 @@ const GH_HEADERS = (token) => ({
 });
 
 module.exports = async (req, res) => {
+  // Health/config check (no secrets leaked, just booleans) — GET the endpoint to verify env vars are applied.
+  if (req.method === "GET") {
+    return res.status(200).json({
+      ok: true,
+      endpoint: "outrank-webhook",
+      configured: {
+        OUTRANK_ACCESS_TOKEN: Boolean(process.env.OUTRANK_ACCESS_TOKEN),
+        GITHUB_TOKEN: Boolean(process.env.GITHUB_TOKEN),
+      },
+    });
+  }
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
