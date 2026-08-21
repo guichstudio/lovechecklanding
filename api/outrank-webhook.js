@@ -57,16 +57,6 @@ module.exports = async (req, res) => {
     try { body = JSON.parse(body); } catch { return res.status(400).json({ error: "Invalid JSON" }); }
   }
 
-  // DEBUG: record the raw incoming payload so we can see exactly what Outrank sends.
-  try {
-    await upsertFile(
-      ghToken,
-      "logs/last-webhook.json",
-      JSON.stringify({ received_at: new Date().toISOString(), event_type: body?.event_type, body }, null, 2),
-      "debug: log incoming Outrank webhook"
-    );
-  } catch (_) { /* best-effort logging, never block */ }
-
   // Robustly locate the article list across payload shapes.
   let articles =
     body?.data?.articles ||
@@ -86,6 +76,7 @@ module.exports = async (req, res) => {
       const html = renderArticle(a, slug);
       await upsertFile(ghToken, `blog/${slug}.html`, html, `Outrank: publish "${a.title}"`);
       await addToSitemap(ghToken, `${SITE}/blog/${slug}`);
+      try { await addToBlogIndex(ghToken, a, slug); } catch (_) { /* listing is non-fatal */ }
       results.push({ slug, status: "published" });
     } catch (e) {
       results.push({ title: a?.title, status: "error", error: String(e && e.message ? e.message : e) });
@@ -160,6 +151,36 @@ async function addToSitemap(token, loc) {
     }),
   });
   if (!r.ok) throw new Error(`sitemap PUT: ${r.status} ${await r.text()}`);
+}
+
+async function addToBlogIndex(token, a, slug) {
+  const file = await ghGetFile(token, "blog/index.html");
+  if (!file) return;
+  let html = Buffer.from(file.content, "base64").toString("utf8");
+  const href = `/blog/${slug}`;
+  if (html.includes(`href="${href}"`)) return; // already listed
+  const marker = "<!-- POSTS_START -->";
+  if (!html.includes(marker)) return; // no anchor to insert at
+  const tag = esc((Array.isArray(a.tags) && a.tags[0]) || "Relationship tips");
+  const card =
+    `\n            <a class="post-card" href="${href}">\n` +
+    `                <span class="post-tag">${tag}</span>\n` +
+    `                <h2>${esc(a.title || "")}</h2>\n` +
+    `                <p>${esc(a.meta_description || "")}</p>\n` +
+    `                <p class="post-meta"><span class="read-more">Read article &rarr;</span></p>\n` +
+    `            </a>`;
+  html = html.replace(marker, marker + card); // newest first
+  const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/blog/index.html`, {
+    method: "PUT",
+    headers: GH_HEADERS(token),
+    body: JSON.stringify({
+      message: `Outrank: list "${a.title}" on blog index`,
+      content: Buffer.from(html, "utf8").toString("base64"),
+      branch: BRANCH,
+      sha: file.sha,
+    }),
+  });
+  if (!r.ok) throw new Error(`blog index PUT: ${r.status} ${await r.text()}`);
 }
 
 function renderArticle(a, slug) {
