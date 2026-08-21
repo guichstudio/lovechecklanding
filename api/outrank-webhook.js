@@ -57,8 +57,22 @@ module.exports = async (req, res) => {
     try { body = JSON.parse(body); } catch { return res.status(400).json({ error: "Invalid JSON" }); }
   }
 
-  let articles = body?.data?.articles;
-  if (!Array.isArray(articles) && body?.data?.article) articles = [body.data.article]; // update_article
+  // DEBUG: record the raw incoming payload so we can see exactly what Outrank sends.
+  try {
+    await upsertFile(
+      ghToken,
+      "logs/last-webhook.json",
+      JSON.stringify({ received_at: new Date().toISOString(), event_type: body?.event_type, body }, null, 2),
+      "debug: log incoming Outrank webhook"
+    );
+  } catch (_) { /* best-effort logging, never block */ }
+
+  // Robustly locate the article list across payload shapes.
+  let articles =
+    body?.data?.articles ||
+    (body?.data?.article ? [body.data.article] : null) ||
+    (Array.isArray(body?.articles) ? body.articles : null) ||
+    (body?.article ? [body.article] : null);
   if (!Array.isArray(articles) || articles.length === 0) {
     return res.status(200).json({ ok: true, message: "No articles in payload", event: body?.event_type });
   }
