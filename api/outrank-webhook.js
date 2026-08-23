@@ -69,11 +69,12 @@ module.exports = async (req, res) => {
 
   // 3. Publish each article (sequential, to avoid sitemap write races)
   const results = [];
+  const existing = await getExistingArticles(ghToken).catch(() => []); // for internal linking
   for (const a of articles) {
     try {
       const slug = slugify(a.slug || a.title || "");
       if (!slug) throw new Error("Missing slug/title");
-      const html = renderArticle(a, slug);
+      const html = renderArticle(a, slug, existing);
       await upsertFile(ghToken, `blog/${slug}.html`, html, `Outrank: publish "${a.title}"`);
       await addToSitemap(ghToken, `${SITE}/blog/${slug}`);
       try { await addToBlogIndex(ghToken, a, slug); } catch (_) { /* listing is non-fatal */ }
@@ -102,6 +103,62 @@ function esc(s) {
   return String(s || "")
     .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+function stripTags(s) {
+  return String(s || "").replace(/<[^>]*>/g, " ");
+}
+
+function decodeEntities(s) {
+  return String(s || "")
+    .replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'")
+    .replace(/&rsquo;|&#8217;/g, "’").replace(/&mdash;|&#8212;/g, "—");
+}
+
+// Build FAQPage structured data from question-style headings in the article body.
+// Only questions/answers that are actually visible on the page are used (Google-compliant).
+function buildFaqSchema(html) {
+  const headingRe = /<h[23][^>]*>([\s\S]*?)<\/h[23]>/gi;
+  const heads = [];
+  let m;
+  while ((m = headingRe.exec(html)) !== null) {
+    heads.push({ text: decodeEntities(stripTags(m[1])).replace(/\s+/g, " ").trim(), start: m.index, end: headingRe.lastIndex });
+  }
+  const faqs = [];
+  for (let i = 0; i < heads.length; i++) {
+    const q = heads[i].text;
+    if (!q.endsWith("?") || q.length < 8) continue;
+    const chunk = html.slice(heads[i].end, i + 1 < heads.length ? heads[i + 1].start : html.length);
+    const a = decodeEntities(stripTags(chunk)).replace(/\s+/g, " ").trim();
+    if (a.length < 40) continue;
+    faqs.push({ q, a: a.slice(0, 900) });
+    if (faqs.length >= 6) break;
+  }
+  if (faqs.length < 2) return null;
+  return JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  });
+}
+
+// Read the existing blog index to know which articles to link to (internal linking).
+async function getExistingArticles(token) {
+  const file = await ghGetFile(token, "blog/index.html");
+  if (!file) return [];
+  const html = Buffer.from(file.content, "base64").toString("utf8");
+  const re = /<a class="post-card" href="(\/blog\/[^"]+)">[\s\S]*?<h2>([\s\S]*?)<\/h2>/gi;
+  const out = [];
+  let m;
+  while ((m = re.exec(html)) !== null) {
+    out.push({ href: m[1], title: decodeEntities(stripTags(m[2])).replace(/\s+/g, " ").trim() });
+  }
+  return out;
 }
 
 async function ghGetFile(token, path) {
@@ -183,7 +240,7 @@ async function addToBlogIndex(token, a, slug) {
   if (!r.ok) throw new Error(`blog index PUT: ${r.status} ${await r.text()}`);
 }
 
-function renderArticle(a, slug) {
+function renderArticle(a, slug, related) {
   const url = `${SITE}/blog/${slug}`;
   const title = esc(a.title || "LoveCheck");
   const desc = esc(a.meta_description || "");
@@ -220,6 +277,15 @@ function renderArticle(a, slug) {
       { "@type": "ListItem", position: 3, name: a.title || "", item: url },
     ],
   });
+  const ldFaq = buildFaqSchema(bodyHtml);
+
+  // Internal linking: link to up to 3 other existing articles.
+  const relItems = (related || []).filter((r) => r.href !== `/blog/${slug}`).slice(0, 3);
+  const relatedSection = relItems.length
+    ? `\n    <section class="related">\n        <div class="container">\n            <h3>Keep reading</h3>\n` +
+      relItems.map((r) => `            <a href="${r.href}">${esc(r.title)} &rarr;</a>`).join("\n") +
+      `\n        </div>\n    </section>`
+    : "";
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -254,7 +320,7 @@ function renderArticle(a, slug) {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <script type="application/ld+json">${ld1}</script>
-    <script type="application/ld+json">${ld2}</script>
+    <script type="application/ld+json">${ld2}</script>${ldFaq ? `\n    <script type="application/ld+json">${ldFaq}</script>` : ""}
 
     <style>
         @font-face { font-family: 'Advercase'; src: url('/fonts/Advercase.otf') format('opentype'); font-weight: normal; font-style: normal; font-display: swap; }
@@ -287,6 +353,11 @@ function renderArticle(a, slug) {
         .app-cta h3 { color: #fff; font-size: 1.25rem; margin-bottom: 8px; }
         .app-cta p { color: rgba(255,255,255,0.9); font-size: 0.92rem; margin-bottom: 18px; }
         .app-cta-btn { display: inline-block; background: #fff; color: #C41E3A; font-weight: 700; padding: 12px 26px; border-radius: 999px; text-decoration: none; font-size: 0.92rem; }
+        .related { padding: 0 24px 48px; }
+        .related .container { background: #fff; border-radius: 16px; padding: 24px 28px; border: 1px solid rgba(0,0,0,0.04); }
+        .related h3 { font-size: 0.8rem; text-transform: uppercase; color: #999; margin-bottom: 12px; letter-spacing: 0; }
+        .related a { display: block; color: #C41E3A; text-decoration: none; font-weight: 600; font-size: 0.98rem; margin-bottom: 8px; }
+        .related a:hover { text-decoration: underline; }
         .footer { padding: 32px 24px; text-align: center; background: #FDF8F4; border-top: 1px solid rgba(0,0,0,0.05); }
         .footer-links { display: flex; justify-content: center; gap: 28px; margin-bottom: 16px; flex-wrap: wrap; }
         .footer-links a { color: #888; text-decoration: none; font-size: 0.8rem; letter-spacing: -0.06em; }
@@ -317,7 +388,7 @@ function renderArticle(a, slug) {
             </div>
         </div>
     </article>
-
+${relatedSection}
     <footer class="footer">
         <div class="container">
             <div class="footer-links">
