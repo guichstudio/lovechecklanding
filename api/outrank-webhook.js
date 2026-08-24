@@ -84,6 +84,13 @@ module.exports = async (req, res) => {
     }
   }
 
+  // After all commits, trigger one final clean deploy so Vercel rebuilds from the
+  // final HEAD and purges the CDN cache (fixes /blog + sitemap showing stale).
+  // Optional: only fires if a Vercel Deploy Hook URL is configured.
+  if (process.env.VERCEL_DEPLOY_HOOK && results.some((r) => r.status === "published")) {
+    try { await fetch(process.env.VERCEL_DEPLOY_HOOK, { method: "POST" }); } catch (_) { /* non-fatal */ }
+  }
+
   const anyError = results.some((r) => r.status === "error");
   return res.status(anyError ? 207 : 200).json({ ok: !anyError, results });
 };
