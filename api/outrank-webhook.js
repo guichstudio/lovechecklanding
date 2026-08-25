@@ -67,32 +67,51 @@ module.exports = async (req, res) => {
     return res.status(200).json({ ok: true, message: "No articles in payload", event: body?.event_type });
   }
 
-  // 3. Publish each article (sequential, to avoid sitemap write races)
-  const results = [];
-  const existing = await getExistingArticles(ghToken).catch(() => []); // for internal linking
-  for (const a of articles) {
-    try {
-      const slug = slugify(a.slug || a.title || "");
-      if (!slug) throw new Error("Missing slug/title");
-      const html = renderArticle(a, slug, existing);
-      await upsertFile(ghToken, `blog/${slug}.html`, html, `Outrank: publish "${a.title}"`);
-      await addToSitemap(ghToken, `${SITE}/blog/${slug}`);
-      try { await addToBlogIndex(ghToken, a, slug); } catch (_) { /* listing is non-fatal */ }
-      results.push({ slug, status: "published" });
-    } catch (e) {
-      results.push({ title: a?.title, status: "error", error: String(e && e.message ? e.message : e) });
+  // 3. Build ALL changes in memory, then write them in ONE atomic commit.
+  //    A single commit = a single Vercel deploy = reliable CDN cache purge.
+  //    (Three separate commits per article confused Vercel's deploy/purge and
+  //    left /blog served stale from the edge cache.)
+  try {
+    const sitemapFile = await ghGetFile(ghToken, "sitemap.xml");
+    const indexFile = await ghGetFile(ghToken, "blog/index.html");
+    let sitemapXml = sitemapFile ? Buffer.from(sitemapFile.content, "base64").toString("utf8") : null;
+    let indexHtml = indexFile ? Buffer.from(indexFile.content, "base64").toString("utf8") : null;
+    const existing = indexHtml ? parseCards(indexHtml) : []; // for internal linking
+
+    const files = [];
+    const results = [];
+    for (const a of articles) {
+      try {
+        const slug = slugify(a.slug || a.title || "");
+        if (!slug) throw new Error("Missing slug/title");
+        files.push({ path: `blog/${slug}.html`, content: renderArticle(a, slug, existing) });
+        if (sitemapXml) sitemapXml = addLocToSitemap(sitemapXml, `${SITE}/blog/${slug}`);
+        if (indexHtml) indexHtml = addCardToIndex(indexHtml, a, slug);
+        existing.unshift({ href: `/blog/${slug}`, title: decodeEntities(String(a.title || "")).trim() });
+        results.push({ slug, status: "published" });
+      } catch (e) {
+        results.push({ title: a?.title, status: "error", error: String(e && e.message ? e.message : e) });
+      }
     }
-  }
 
-  // After all commits, trigger one final clean deploy so Vercel rebuilds from the
-  // final HEAD and purges the CDN cache (fixes /blog + sitemap showing stale).
-  // Optional: only fires if a Vercel Deploy Hook URL is configured.
-  if (process.env.VERCEL_DEPLOY_HOOK && results.some((r) => r.status === "published")) {
-    try { await fetch(process.env.VERCEL_DEPLOY_HOOK, { method: "POST" }); } catch (_) { /* non-fatal */ }
-  }
+    if (sitemapFile && sitemapXml) files.push({ path: "sitemap.xml", content: sitemapXml });
+    if (indexFile && indexHtml) files.push({ path: "blog/index.html", content: indexHtml });
 
-  const anyError = results.some((r) => r.status === "error");
-  return res.status(anyError ? 207 : 200).json({ ok: !anyError, results });
+    const published = results.filter((r) => r.status === "published").map((r) => r.slug);
+    if (files.length) {
+      await commitFilesAtomic(ghToken, files, `Outrank: publish ${published.join(", ") || "articles"}`);
+    }
+
+    // Extra safety net: fire a Vercel deploy hook if configured (forces a fresh deploy).
+    if (process.env.VERCEL_DEPLOY_HOOK && published.length) {
+      try { await fetch(process.env.VERCEL_DEPLOY_HOOK, { method: "POST" }); } catch (_) { /* non-fatal */ }
+    }
+
+    const anyError = results.some((r) => r.status === "error");
+    return res.status(anyError ? 207 : 200).json({ ok: !anyError, results });
+  } catch (e) {
+    return res.status(500).json({ ok: false, error: String(e && e.message ? e.message : e) });
+  }
 };
 
 /* ---------------- helpers ---------------- */
@@ -154,11 +173,8 @@ function buildFaqSchema(html) {
   });
 }
 
-// Read the existing blog index to know which articles to link to (internal linking).
-async function getExistingArticles(token) {
-  const file = await ghGetFile(token, "blog/index.html");
-  if (!file) return [];
-  const html = Buffer.from(file.content, "base64").toString("utf8");
+// Parse the blog index HTML into a list of {href, title} for internal linking.
+function parseCards(html) {
   const re = /<a class="post-card" href="(\/blog\/[^"]+)">[\s\S]*?<h2>([\s\S]*?)<\/h2>/gi;
   const out = [];
   let m;
@@ -166,6 +182,32 @@ async function getExistingArticles(token) {
     out.push({ href: m[1], title: decodeEntities(stripTags(m[2])).replace(/\s+/g, " ").trim() });
   }
   return out;
+}
+
+// Pure transform: add a <url> entry to the sitemap XML (idempotent).
+function addLocToSitemap(xml, loc) {
+  if (xml.includes(`<loc>${loc}</loc>`)) return xml;
+  const today = new Date().toISOString().slice(0, 10);
+  const entry =
+    `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${today}</lastmod>\n` +
+    `    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>\n`;
+  return xml.replace("</urlset>", entry + "</urlset>");
+}
+
+// Pure transform: add a post card to the blog index at the marker (idempotent, newest first).
+function addCardToIndex(html, a, slug) {
+  const href = `/blog/${slug}`;
+  const marker = "<!-- POSTS_START -->";
+  if (html.includes(`href="${href}"`) || !html.includes(marker)) return html;
+  const tag = esc((Array.isArray(a.tags) && a.tags[0]) || "Relationship tips");
+  const card =
+    `\n            <a class="post-card" href="${href}">\n` +
+    `                <span class="post-tag">${tag}</span>\n` +
+    `                <h2>${esc(a.title || "")}</h2>\n` +
+    `                <p>${esc(a.meta_description || "")}</p>\n` +
+    `                <p class="post-meta"><span class="read-more">Read article &rarr;</span></p>\n` +
+    `            </a>`;
+  return html.replace(marker, marker + card);
 }
 
 async function ghGetFile(token, path) {
@@ -178,73 +220,35 @@ async function ghGetFile(token, path) {
   return r.json();
 }
 
-async function upsertFile(token, path, content, message) {
-  const existing = await ghGetFile(token, path);
-  const payload = {
-    message,
-    content: Buffer.from(content, "utf8").toString("base64"),
-    branch: BRANCH,
-  };
-  if (existing && existing.sha) payload.sha = existing.sha;
-  const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
-    method: "PUT",
+// Generic GitHub API JSON call.
+async function ghJson(token, url, method, body) {
+  const r = await fetch(url, {
+    method: method || "GET",
     headers: GH_HEADERS(token),
-    body: JSON.stringify(payload),
+    body: body ? JSON.stringify(body) : undefined,
   });
-  if (!r.ok) throw new Error(`GitHub PUT ${path}: ${r.status} ${await r.text()}`);
+  if (!r.ok) throw new Error(`GitHub ${method || "GET"} ${url.replace(/^https:\/\/api\.github\.com/, "")}: ${r.status} ${await r.text()}`);
+  return r.json();
 }
 
-async function addToSitemap(token, loc) {
-  const file = await ghGetFile(token, "sitemap.xml");
-  if (!file) return; // no sitemap to update
-  let xml = Buffer.from(file.content, "base64").toString("utf8");
-  if (xml.includes(`<loc>${loc}</loc>`)) return; // already listed
-  const today = new Date().toISOString().slice(0, 10);
-  const entry =
-    `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${today}</lastmod>\n` +
-    `    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>\n`;
-  xml = xml.replace("</urlset>", entry + "</urlset>");
-  const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/sitemap.xml`, {
-    method: "PUT",
-    headers: GH_HEADERS(token),
-    body: JSON.stringify({
-      message: `Outrank: add ${loc} to sitemap`,
-      content: Buffer.from(xml, "utf8").toString("base64"),
-      branch: BRANCH,
-      sha: file.sha,
-    }),
-  });
-  if (!r.ok) throw new Error(`sitemap PUT: ${r.status} ${await r.text()}`);
-}
-
-async function addToBlogIndex(token, a, slug) {
-  const file = await ghGetFile(token, "blog/index.html");
-  if (!file) return;
-  let html = Buffer.from(file.content, "base64").toString("utf8");
-  const href = `/blog/${slug}`;
-  if (html.includes(`href="${href}"`)) return; // already listed
-  const marker = "<!-- POSTS_START -->";
-  if (!html.includes(marker)) return; // no anchor to insert at
-  const tag = esc((Array.isArray(a.tags) && a.tags[0]) || "Relationship tips");
-  const card =
-    `\n            <a class="post-card" href="${href}">\n` +
-    `                <span class="post-tag">${tag}</span>\n` +
-    `                <h2>${esc(a.title || "")}</h2>\n` +
-    `                <p>${esc(a.meta_description || "")}</p>\n` +
-    `                <p class="post-meta"><span class="read-more">Read article &rarr;</span></p>\n` +
-    `            </a>`;
-  html = html.replace(marker, marker + card); // newest first
-  const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/blog/index.html`, {
-    method: "PUT",
-    headers: GH_HEADERS(token),
-    body: JSON.stringify({
-      message: `Outrank: list "${a.title}" on blog index`,
-      content: Buffer.from(html, "utf8").toString("base64"),
-      branch: BRANCH,
-      sha: file.sha,
-    }),
-  });
-  if (!r.ok) throw new Error(`blog index PUT: ${r.status} ${await r.text()}`);
+// Commit multiple files in ONE commit via the Git Data API.
+// One commit -> one Vercel deploy -> reliable CDN cache purge.
+async function commitFilesAtomic(token, files, message) {
+  const base = `https://api.github.com/repos/${OWNER}/${REPO}`;
+  const ref = await ghJson(token, `${base}/git/ref/heads/${BRANCH}`);
+  const baseSha = ref.object.sha;
+  const baseCommit = await ghJson(token, `${base}/git/commits/${baseSha}`);
+  const tree = [];
+  for (const f of files) {
+    const blob = await ghJson(token, `${base}/git/blobs`, "POST", {
+      content: Buffer.from(f.content, "utf8").toString("base64"),
+      encoding: "base64",
+    });
+    tree.push({ path: f.path, mode: "100644", type: "blob", sha: blob.sha });
+  }
+  const newTree = await ghJson(token, `${base}/git/trees`, "POST", { base_tree: baseCommit.tree.sha, tree });
+  const commit = await ghJson(token, `${base}/git/commits`, "POST", { message, tree: newTree.sha, parents: [baseSha] });
+  await ghJson(token, `${base}/git/refs/heads/${BRANCH}`, "PATCH", { sha: commit.sha });
 }
 
 function renderArticle(a, slug, related) {
