@@ -267,6 +267,12 @@ function renderArticle(a, slug, related) {
   let bodyHtml = String(a.content_html || "");
   bodyHtml = bodyHtml.replace(/<(\/?)h1(\b[^>]*)>/gi, "<$1h2$2>");
 
+  // Featured/hero image at the top of the article (skip if already in the body to avoid duplicates).
+  const heroUrl = a.image_url ? esc(a.image_url) : "";
+  const hero = heroUrl && !bodyHtml.includes(a.image_url)
+    ? `<img class="article-hero" src="${heroUrl}" alt="${title}">`
+    : "";
+
   const ld1 = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -349,7 +355,8 @@ function renderArticle(a, slug, related) {
         article { padding: 20px 24px 48px; }
         .article-tag { display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: #C41E3A; background: #FCE9EC; padding: 4px 10px; border-radius: 999px; margin-bottom: 16px; }
         .article-title { font-family: 'Advercase', Georgia, serif; font-size: 2.1rem; color: #C41E3A; line-height: 1.15; margin-bottom: 12px; }
-        .article-meta { font-size: 0.82rem; color: #999; margin-bottom: 32px; }
+        .article-meta { font-size: 0.82rem; color: #999; margin-bottom: 24px; }
+        .article-hero { display: block; width: 100%; max-height: 440px; object-fit: cover; border-radius: 20px; margin-bottom: 28px; border: 1px solid rgba(0,0,0,0.04); }
         .article-body { background: #fff; border-radius: 20px; padding: 40px; border: 1px solid rgba(0,0,0,0.04); }
         .article-body p { margin-bottom: 18px; font-size: 0.98rem; color: #333; }
         .article-body h2 { font-size: 1.35rem; font-weight: 700; color: #2D2D2D; margin: 34px 0 12px; }
@@ -389,6 +396,7 @@ function renderArticle(a, slug, related) {
             <span class="article-tag">${tag}</span>
             <h1 class="article-title">${title}</h1>
             <p class="article-meta">Updated ${dateLabel}</p>
+            ${hero}
             <div class="article-body">
                 ${bodyHtml}
                 <div class="app-cta">
