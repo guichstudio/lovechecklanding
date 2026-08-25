@@ -200,12 +200,18 @@ function addCardToIndex(html, a, slug) {
   const marker = "<!-- POSTS_START -->";
   if (html.includes(`href="${href}"`) || !html.includes(marker)) return html;
   const tag = esc((Array.isArray(a.tags) && a.tags[0]) || "Relationship tips");
+  const title = esc(a.title || "");
+  const thumb = a.image_url
+    ? `<div class="post-thumb"><img src="${esc(a.image_url)}" alt="${title}" loading="lazy"></div>`
+    : `<div class="post-thumb post-thumb--ph"><img src="/icon.png" alt="LoveCheck"></div>`;
   const card =
     `\n            <a class="post-card" href="${href}">\n` +
-    `                <span class="post-tag">${tag}</span>\n` +
-    `                <h2>${esc(a.title || "")}</h2>\n` +
-    `                <p>${esc(a.meta_description || "")}</p>\n` +
-    `                <p class="post-meta"><span class="read-more">Read article &rarr;</span></p>\n` +
+    `                ${thumb}\n` +
+    `                <div class="post-card-body">\n` +
+    `                    <span class="post-tag">${tag}</span>\n` +
+    `                    <h2>${title}</h2>\n` +
+    `                    <p>${esc(a.meta_description || "")}</p>\n` +
+    `                </div>\n` +
     `            </a>`;
   return html.replace(marker, marker + card);
 }

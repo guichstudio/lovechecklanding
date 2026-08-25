@@ -107,23 +107,29 @@
             font-size: 1rem;
         }
 
-        /* Post list */
+        /* Post grid */
         .posts { padding: 32px 24px 56px; }
+        .posts .container { max-width: 1080px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; align-items: start; }
         .post-card {
-            display: block;
+            display: flex;
+            flex-direction: column;
             background: #FFFFFF;
             border-radius: 20px;
-            padding: 28px 30px;
-            margin-bottom: 20px;
+            overflow: hidden;
             text-decoration: none;
             color: inherit;
+            border: 1px solid rgba(0,0,0,0.06);
             transition: transform 0.15s ease, box-shadow 0.15s ease;
-            border: 1px solid rgba(0,0,0,0.04);
         }
         .post-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(196, 30, 58, 0.08);
+            transform: translateY(-3px);
+            box-shadow: 0 14px 34px rgba(196, 30, 58, 0.12);
         }
+        .post-thumb { aspect-ratio: 16 / 10; overflow: hidden; background: #FCE9EC; }
+        .post-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .post-thumb--ph { display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #C41E3A, #E14B63); }
+        .post-thumb--ph img { width: 72px; height: 72px; object-fit: contain; }
+        .post-card-body { padding: 22px 24px 26px; }
         .post-tag {
             display: inline-block;
             font-size: 0.72rem;
@@ -137,14 +143,13 @@
             margin-bottom: 12px;
         }
         .post-card h2 {
-            font-size: 1.35rem;
+            font-size: 1.2rem;
             font-weight: 700;
             margin-bottom: 8px;
             color: #2D2D2D;
+            line-height: 1.3;
         }
-        .post-card p { color: #666; font-size: 0.92rem; margin-bottom: 12px; }
-        .post-meta { font-size: 0.8rem; color: #999; }
-        .read-more { color: #C41E3A; font-weight: 600; font-size: 0.88rem; }
+        .post-card p { color: #666; font-size: 0.92rem; }
 
         /* Footer */
         .footer {
@@ -166,7 +171,6 @@
 
         @media (max-width: 480px) {
             .blog-hero h1 { font-size: 1.9rem; }
-            .post-card { padding: 22px 22px; }
         }
     </style>
 </head>
@@ -186,47 +190,60 @@
         <div class="container">
             <!-- POSTS_START -->
             <a class="post-card" href="/blog/silent-treatment-in-relationships">
-                <span class="post-tag">silent treatment</span>
-                <h2>Silent Treatment in Relationships: What It Means and How To</h2>
-                <p>Discover what the silent treatment in relationships means and learn effective ways to heal and reconnect with your partner.</p>
-                <p class="post-meta"><span class="read-more">Read article &rarr;</span></p>
+                <div class="post-thumb"><img src="https://cdnimg.co/25cc662f-75eb-4528-8409-f6c088364605/8cef29a9-2dbc-44ac-9425-6f595d90cdc7/silent-treatment-in-relationships-sketched-couple.jpg" alt="Silent Treatment in Relationships: What It Means and How To" loading="lazy"></div>
+                <div class="post-card-body">
+                    <span class="post-tag">silent treatment</span>
+                    <h2>Silent Treatment in Relationships: What It Means and How To</h2>
+                    <p>Discover what the silent treatment in relationships means and learn effective ways to heal and reconnect with your partner.</p>
+                </div>
             </a>
             <a class="post-card" href="/blog/how-to-bring-intimacy-back-into-a-marriage">
-                <span class="post-tag">rebuild intimacy</span>
-                <h2>How to Bring Intimacy Back Into a Marriage: Simple Daily</h2>
-                <p>Discover how to bring intimacy back into a marriage with small daily rituals, conversation prompts, and practical exercises.</p>
-                <p class="post-meta"><span class="read-more">Read article &rarr;</span></p>
+                <div class="post-thumb"><img src="https://cdnimg.co/25cc662f-75eb-4528-8409-f6c088364605/c2ceb753-2420-4c28-8685-a82626f6695c/how-to-bring-intimacy-back-into-a-marriage-couple-love.jpg" alt="How to Bring Intimacy Back Into a Marriage: Simple Daily" loading="lazy"></div>
+                <div class="post-card-body">
+                    <span class="post-tag">rebuild intimacy</span>
+                    <h2>How to Bring Intimacy Back Into a Marriage: Simple Daily</h2>
+                    <p>Discover how to bring intimacy back into a marriage with small daily rituals, conversation prompts, and practical exercises.</p>
+                </div>
             </a>
             <a class="post-card" href="/blog/signs-relationship-will-last">
-                <span class="post-tag">signs relationship will last</span>
-                <h2>8 Signs Relationship Will Last: Build Lasting Love</h2>
-                <p>Discover the key signs relationship will last and learn how to nurture a strong, enduring bond with your partner in 2026.</p>
-                <p class="post-meta"><span class="read-more">Read article &rarr;</span></p>
+                <div class="post-thumb"><img src="https://cdnimg.co/25cc662f-75eb-4528-8409-f6c088364605/b77884f2-55f8-417b-b604-164644949156/signs-relationship-will-last-couple-sketch.jpg" alt="8 Signs Relationship Will Last: Build Lasting Love" loading="lazy"></div>
+                <div class="post-card-body">
+                    <span class="post-tag">signs relationship will last</span>
+                    <h2>8 Signs Relationship Will Last: Build Lasting Love</h2>
+                    <p>Discover the key signs relationship will last and learn how to nurture a strong, enduring bond with your partner in 2026.</p>
+                </div>
             </a>
             <a class="post-card" href="/blog/games-for-couples-online">
-                <span class="post-tag">games for couples online</span>
-                <h2>10 Games for Couples Online: Remote Date-Night Picks</h2>
-                <p>Find the best games for couples online, from quick quizzes to co-op adventures, with setup steps and practical remote-play tips.</p>
-                <p class="post-meta"><span class="read-more">Read article &rarr;</span></p>
+                <div class="post-thumb"><img src="https://cdnimg.co/25cc662f-75eb-4528-8409-f6c088364605/a2b2082e-5b40-4721-96be-529611a4fe43/games-for-couples-online-date-night.jpg" alt="10 Games for Couples Online: Remote Date-Night Picks" loading="lazy"></div>
+                <div class="post-card-body">
+                    <span class="post-tag">games for couples online</span>
+                    <h2>10 Games for Couples Online: Remote Date-Night Picks</h2>
+                    <p>Find the best games for couples online, from quick quizzes to co-op adventures, with setup steps and practical remote-play tips.</p>
+                </div>
             </a>
             <a class="post-card" href="/blog/questions-to-ask-before-moving-in-together">
-                <span class="post-tag">Relationship questions</span>
-                <h2>10 Questions to Ask Before Moving in Together</h2>
-                <p>Use these questions to ask before moving in together to discuss money, chores, boundaries, intimacy, conflict, and future plans with care.</p>
-                <p class="post-meta"><span class="read-more">Read article →</span></p>
+                <div class="post-thumb"><img src="https://cdnimg.co/25cc662f-75eb-4528-8409-f6c088364605/06d463b8-42fa-49c3-a336-d77b66a67c6e/questions-to-ask-before-moving-in-together-relationship-advice.jpg" alt="10 Questions to Ask Before Moving in Together" loading="lazy"></div>
+                <div class="post-card-body">
+                    <span class="post-tag">Relationship questions</span>
+                    <h2>10 Questions to Ask Before Moving in Together</h2>
+                    <p>Use these questions to ask before moving in together to discuss money, chores, boundaries, intimacy, conflict, and future plans with care.</p>
+                </div>
             </a>
             <a class="post-card" href="/blog/couple-therapy-exercises-at-home">
-                <span class="post-tag">Relationship exercises</span>
-                <h2>7 Couple Therapy Exercises You Can Do at Home (No Therapist Needed)</h2>
-                <p>Simple, therapist-inspired exercises — active listening, weekly check-ins, appreciation rituals — you can start together tonight.</p>
-                <p class="post-meta">8 min read · <span class="read-more">Read article →</span></p>
+                <div class="post-thumb post-thumb--ph"><img src="/icon.png" alt="LoveCheck"></div>
+                <div class="post-card-body">
+                    <span class="post-tag">Relationship exercises</span>
+                    <h2>7 Couple Therapy Exercises You Can Do at Home (No Therapist Needed)</h2>
+                    <p>Simple, therapist-inspired exercises — active listening, weekly check-ins, appreciation rituals — you can start together tonight.</p>
+                </div>
             </a>
-
             <a class="post-card" href="/blog/questions-to-feel-closer-to-your-partner">
-                <span class="post-tag">Conversation starters</span>
-                <h2>50 Questions to Ask Your Partner to Feel Closer</h2>
-                <p>From playful to deep, these questions spark the kind of conversations that rebuild intimacy and remind you why you chose each other.</p>
-                <p class="post-meta">7 min read · <span class="read-more">Read article →</span></p>
+                <div class="post-thumb post-thumb--ph"><img src="/icon.png" alt="LoveCheck"></div>
+                <div class="post-card-body">
+                    <span class="post-tag">Conversation starters</span>
+                    <h2>50 Questions to Ask Your Partner to Feel Closer</h2>
+                    <p>From playful to deep, these questions spark the kind of conversations that rebuild intimacy and remind you why you chose each other.</p>
+                </div>
             </a>
         </div>
     </main>
