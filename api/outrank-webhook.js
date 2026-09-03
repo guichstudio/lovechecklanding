@@ -16,6 +16,12 @@ const OWNER = "guichstudio";
 const REPO = "lovechecklanding";
 const BRANCH = "main";
 const SITE = "https://www.lovecheckapp.com";
+// Kill switch de publication. Pause par defaut : la publication automatique
+// est suspendue tant que OUTRANK_PUBLISHING_ENABLED n'est pas exactement "true".
+// Motif : 16 articles en 16 jours sur un domaine de 3 semaines, tous en position
+// 85-95 avec 0 clic. Pour reprendre : definir la variable dans Vercel.
+const PUBLISHING_ENABLED = process.env.OUTRANK_PUBLISHING_ENABLED === "true";
+
 const GH_HEADERS = (token) => ({
   Authorization: `Bearer ${token}`,
   "User-Agent": "lovecheck-outrank-webhook",
@@ -33,6 +39,7 @@ module.exports = async (req, res) => {
         OUTRANK_ACCESS_TOKEN: Boolean(process.env.OUTRANK_ACCESS_TOKEN),
         GITHUB_TOKEN: Boolean(process.env.GITHUB_TOKEN),
       },
+      publishing_enabled: PUBLISHING_ENABLED,
     });
   }
   if (req.method !== "POST") {
@@ -44,6 +51,16 @@ module.exports = async (req, res) => {
   const auth = req.headers["authorization"] || "";
   if (!token || auth !== `Bearer ${token}`) {
     return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  // Publication en pause : on accuse reception sans rien ecrire.
+  // 200 (et non 4xx/5xx) pour qu'Outrank ne rejoue pas la livraison en boucle.
+  if (!PUBLISHING_ENABLED) {
+    return res.status(200).json({
+      ok: true,
+      paused: true,
+      message: "Publishing is paused. Set OUTRANK_PUBLISHING_ENABLED=true to resume.",
+    });
   }
 
   const ghToken = process.env.GITHUB_TOKEN;
